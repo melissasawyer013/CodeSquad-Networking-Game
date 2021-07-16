@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const app = express();
@@ -11,9 +12,9 @@ app.use(express.json());
 const routes = require('./routes/index');
 app.use('/', routes);
 
-// require('./config/connection');
+require('./config/connection');
 
 app.listen(PORT, () => {
-    console.log(`Server has started and can be seen on http://localhost:${PORT}`)
+    console.log(`Server has started and can be seen at: http://localhost:${PORT}`)
 });
 
