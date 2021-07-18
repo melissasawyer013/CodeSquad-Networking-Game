@@ -105,6 +105,7 @@ nav {
         z-index: 1;
         padding: 10px 20px;
         background-color: var(--light-grey);
+        overflow: overlay;
     }
 
     .navbar-dropdown-list.navbar-dropdown-open li {
@@ -232,9 +233,11 @@ footer li a:active {
 /* Content */
 .container-content {
     min-height: 800px;
-    width: 70%;
-    border: var(--black) 1pt solid;
-    margin: 5% 0;
+    width: 60%;
+    border: var(--red) 3px solid;
+    margin: 10% 0;
+    padding: 2% 5%;
+    /* background-color: var(--light-grey); */
 }
 
 .container-graduate-list-row {

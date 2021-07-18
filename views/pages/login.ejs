@@ -3,17 +3,15 @@
 
 <div class="container-content">
     <h1>Login</h1>
+    <% if(message != undefined) { %>
+        <p> <%= message %> </p>
+    <% } %> 
     <form action="/profile/login" method="POST">
         <label for="email">Email:</label>
         <input type="text" id="email" name="email" placeholder="Email">
         <br /> <br />
         <input type="submit" value="Login with GitHub">
-    </form>
-    <!-- <a href="/profile/auth/github/">Login with GitHub</a> -->
-    
-    
+    </form>  
 </div>
-
-
 
 <%- include('../partials/footer') -%> 

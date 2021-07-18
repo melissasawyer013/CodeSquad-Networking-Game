@@ -6,7 +6,4 @@ const scoreboardController = require('../controllers/scoreboard-controller');
 router.route('/')
     .get(scoreboardController.scoreboard);
 
-
-
-
 module.exports = router;

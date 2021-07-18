@@ -16,9 +16,6 @@ router.route('/auth/github')
 router.route('/auth/github/callback')
     .get(profileController.githubCallback)
 
-router.route('/success')
-    .get(profileController.success)
-
 router.route('/logout')
     .get(profileController.logout)
 

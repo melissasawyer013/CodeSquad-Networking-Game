@@ -1,14 +1,25 @@
 module.exports = {
     index: (req, res) => {
-        res.render('pages/index')
+        if(req.isAuthenticated()) {
+            res.render('pages/index', {user: req.user})
+        } else {
+            res.render('pages/index', {user: undefined})
+        };
     },
 
     about: (req, res) => {
-        res.render('pages/about')
+        if(req.isAuthenticated()) {
+            res.render('pages/about', {user: req.user})
+        } else {
+            res.render('pages/about', {user: undefined})
+        };
     },
 
     resources: (req, res) => {
-        res.render('pages/resources');
-    }
-
+        if(req.isAuthenticated()) {
+            res.render('pages/resources', { user: req.user });    
+        } else {
+            res.render('pages/login', { message: `You need to be logged in to access this page. Please login now.`, user: undefined })
+        };
+    },
 };

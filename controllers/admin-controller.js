@@ -2,69 +2,117 @@ const Graduate = require('../models/graduateSchema');
 
 module.exports = {
     admin: (req, res) => {
-        res.render('pages/admin')
+        if(req.isAuthenticated()) {
+            if(req.user.adminStatus === 'Admin') {
+                res.render('pages/admin', { user: req.user });    
+            } else {
+                res.render('pages/profile', { user: req.user, message: `You are not authorized to access the admin page.`})
+            }   
+        } else {
+            res.render('pages/login', { message: `You need to be logged in and an admin to access this page. Please login now.`, user: undefined })
+        };
     },
 
     createGraduatePage: (req, res) => {
-        res.render('pages/create-graduate')
+        if(req.isAuthenticated()) {
+            if(req.user.adminStatus === 'Admin') {
+                res.render('pages/create-graduate', { user: req.user });    
+            } else {
+                res.render('pages/profile', { user: req.user, message: `You are not authorized to create graduates.`})
+            }   
+        } else {
+            res.render('pages/login', { message: `You need to be logged in and an admin to access this page. Please login now.`, user: undefined })
+        };
     },
 
     createGraduate: (req, res) => {
-        const newGraduate = new Graduate({
-            name: req.body.name,
-            email: req.body.email,
-            cohortYear: req.body.cohortYear,
-            photoUrl: req.body.photoUrl,
-            githubUrl: req.body.githubUrl,
-            linkedinUrl: req.body.linkedinUrl,
-            totalPoints: 0,
-            tasksCompleted: [],
-            adminStatus: req.body.adminStatus,
-        });
-        newGraduate.save();
-        console.log(`newGraduate: ${newGraduate}`);
-        res.redirect('/admin');
+        if(req.isAuthenticated()) {
+            if(req.user.adminStatus === 'Admin') {
+                const newGraduate = new Graduate({
+                    name: req.body.name,
+                    email: req.body.email,
+                    cohortYear: req.body.cohortYear,
+                    photoUrl: req.body.photoUrl,
+                    githubUrl: req.body.githubUrl,
+                    linkedinUrl: req.body.linkedinUrl,
+                    totalPoints: 0,
+                    tasksCompleted: [],
+                    adminStatus: req.body.adminStatus,
+                });
+                newGraduate.save();
+                console.log(`newGraduate: ${newGraduate}`);
+                res.redirect('/admin');    
+            } else {
+                res.render('pages/profile', { user: req.user, message: `You are not authorized to create graduates.`})
+            }   
+        } else {
+            res.render('pages/login', { message: `You need to be logged in and an admin to access this page. Please login now.`, user: undefined })
+        };
     },
 
     graduatesList: (req, res) => {
-        Graduate.find({}, (err, graduates) => {
-            if(err) {
-                return err;
+        if(req.isAuthenticated()) {
+            if(req.user.adminStatus === 'Admin') {
+                Graduate.find({}, (err, graduates) => {
+                    if(err) {
+                        return err;
+                    } else {
+                        res.render('pages/graduates-list', {graduates: graduates});
+                    };
+                })      
             } else {
-                res.render('pages/graduates-list', {graduates: graduates});
-            };
-        })   
+                res.render('pages/profile', { user: req.user, message: `You are not authorized to access the graduates list.`})
+            }   
+        } else {
+            res.render('pages/login', { message: `You need to be logged in and an admin to access this page. Please login now.`, user: undefined })
+        };
     },
 
     editGraduate: (req, res) => {
-        const { id } = req.params;
-        Graduate.findOne({_id: id}, (err, foundGraduate) => {
-            if(err) {
-                return err;
+        if(req.isAuthenticated()) {
+            if(req.user.adminStatus === 'Admin') {
+                const { id } = req.params;
+                Graduate.findOne({_id: id}, (err, foundGraduate) => {
+                    if(err) {
+                        return err;
+                    } else {
+                        res.render('pages/admin-graduate-edit', {foundGraduate: foundGraduate});
+                    };
+                })
             } else {
-                res.render('pages/admin-graduate-edit', {foundGraduate: foundGraduate});
-            };
-        })
+                res.render('pages/profile', { user: req.user, message: `You are not authorized to edit graduates.`})
+            }   
+        } else {
+            res.render('pages/login', { message: `You need to be logged in and an admin to access this page. Please login now.`, user: undefined })
+        };
     },
 
     updateGraduate: (req, res) => {
-        const { id } = req.params;
-        Graduate.findByIdAndUpdate(id, {$set: {
-            name: req.body.name,
-            email: req.body.email,
-            cohortYear: req.body.cohortYear,
-            photoUrl: req.body.photoUrl,
-            githubUrl: req.body.githubUrl,
-            linkedinUrl: req.body.linkedinUrl,
-            //total points and tasks completed need added here
-            adminStatus: req.body.adminStatus,
-        }}, { new: true }, err => {
-            if (err) {
-                return err;
+        if(req.isAuthenticated()) {
+            if(req.user.adminStatus === 'Admin') {
+                const { id } = req.params;
+                Graduate.findByIdAndUpdate(id, {$set: {
+                    name: req.body.name,
+                    email: req.body.email,
+                    cohortYear: req.body.cohortYear,
+                    photoUrl: req.body.photoUrl,
+                    githubUrl: req.body.githubUrl,
+                    linkedinUrl: req.body.linkedinUrl,
+                    //total points, tasks completed, githubId, and githubProfile need added here
+                    adminStatus: req.body.adminStatus,
+                }}, { new: true }, err => {
+                    if (err) {
+                        return err;
+                    } else {
+                        res.redirect(`/admin/graduateEdit/${id}`);
+                    };
+                })
             } else {
-                res.redirect(`/admin/graduateEdit/${id}`);
-            };
-        })
+                res.render('pages/profile', { user: req.user, message: `You are not authorized to edit graduates.`})
+            }   
+        } else {
+            res.render('pages/login', { message: `You need to be logged in and an admin to access this page. Please login now.`, user: undefined })
+        };
     },
 
 };

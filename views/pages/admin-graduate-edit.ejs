@@ -6,27 +6,27 @@
     <a href="/admin/graduatesList">Back to Graduate List</a>
     <form action="/admin/graduateEdit/<%= foundGraduate._id %>?_method=PUT " method="POST" enctype="application/x-www-form-urlencoded">
         <label for="name">Full Name:</label>
-        <input type="text" id="name" name="name" value="<%= foundGraduate.name %> ">
+        <input type="text" id="name" name="name" value="<%=foundGraduate.name%>">
         <br /> <br />
 
         <label for="email">Email:</label>
-        <input type="text" id="email" name="email" value="<%= foundGraduate.email %> ">
+        <input type="text" id="email" name="email" value="<%=foundGraduate.email%>">
         <br /> <br />
 
         <label for="cohortYear">Cohort Year:</label>
-        <input type="text" id="cohortYear" name="cohortYear" value="<%= foundGraduate.cohortYear %> ">
+        <input type="text" id="cohortYear" name="cohortYear" value="<%=foundGraduate.cohortYear%>">
         <br /> <br />
 
         <label for="photoUrl">Photo URL Path:</label>
-        <input type="text" id="photoUrl" name="photoUrl" value="<%= foundGraduate.photoUrl %> ">
+        <input type="text" id="photoUrl" name="photoUrl" value="<%=foundGraduate.photoUrl%>">
         <br /> <br />
 
         <label for="githubUrl">GitHub URL:</label>
-        <input type="text" id="githubUrl" name="githubUrl" value="<%= foundGraduate.githubUrl %> ">
+        <input type="text" id="githubUrl" name="githubUrl" value="<%=foundGraduate.githubUrl%>">
         <br /> <br />
 
         <label for="linkedinUrl">LinkedIn URL:</label>
-        <input type="text" id="linkedinUrl" name="linkedinUrl" value="<%= foundGraduate.linkedinUrl %> ">
+        <input type="text" id="linkedinUrl" name="linkedinUrl" value="<%=foundGraduate.linkedinUrl%>">
         <br /> <br />
 
         <p>Admin Status</p>

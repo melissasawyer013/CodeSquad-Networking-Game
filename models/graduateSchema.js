@@ -36,6 +36,9 @@ const graduateSchema = new Schema({
     },
     githubId: {
         type: String
+    },
+    githubProfile: {
+        type: String
     }
 }, {
     timestamps: true
@@ -45,10 +48,10 @@ const Graduate = mongoose.model('Graduate', graduateSchema);
 
 passport.serializeUser(function(user, done) {
     done(null, user.id);
-});
+  });
   
 passport.deserializeUser(function(id, done) {
-    Graduate.findById(authenticationInfo.user.id, function(err, user) {
+    Graduate.findById(id, function(err, user) {
         done(err, user);
     });
 });
@@ -57,26 +60,19 @@ passport.use(new GitHubStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     callbackURL: "http://localhost:5500/profile/auth/github/callback"
-  },
-  function(accessToken, refreshToken, profile, done) {
-    // asynchronous verification
-    process.nextTick(function () {
-        const { id } = authenticationInfo.user._id;
-        console.log(`The id is: ${id}`);
-        authenticationInfo.profileUrl = profile.profileUrl;
-        console.log(`returned profile: ${profile.profileUrl}`);
-        
-        //don't think I need htis
-        Graduate.findByIdAndUpdate(id, {$set: {
-            githubId: profile.id
-        }})
-        return done(null, profile, accessToken, refreshToken);
-    });
-  }
+},
+    function(accessToken, refreshToken, profile, done) {
+        //conditional checks if the GitHub URL returned matches what was saved in the githubUrlToMatch variable from the database
+        if (profile.profileUrl === authenticationInfo.githubUrlToMatch) {
+            Graduate.findOne({ githubUrl: profile.profileUrl }, function (err, user) {
+                Graduate.findOneAndUpdate({githubUrl: profile.profileUrl}, {$set: { githubId:profile.id }}, { new: true }, error => {})
+                return done(err, user);
+            });
+        } else {
+            console.log(`Not a match. Loggin out.`);
+            return done;    
+        };
+    }
 ));
-
-//58709646
-
-//http://localhost:5500/profile/auth/github/callback?code=63b22e0f5adf739b0067
 
 module.exports = Graduate;

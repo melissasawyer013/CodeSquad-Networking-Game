@@ -2,8 +2,14 @@
 <%- include('../partials/navbar') -%>
 
 <div class="container-content">
-    <h1>Profile Page</h1>
-    <a href="/admin">Admin Dashboard</a>
+    <h1>Profile: <%= user.name  %> </h1>
+    <% if(message != undefined ) { %>
+        <%= message %> 
+    <% } %> 
+    <% if(user.adminStatus === 'Admin') { %>
+        <a href="/admin">Admin Dashboard</a>
+    <% } %> 
+    
 </div>
 
 
