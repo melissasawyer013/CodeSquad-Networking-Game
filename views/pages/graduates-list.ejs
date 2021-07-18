@@ -1,0 +1,15 @@
+<%- include('../partials/head') -%>
+<%- include('../partials/navbar') -%>
+
+<div class="container-content">
+    <h1>Graduates List Page</h1>
+    
+    <% graduates.forEach( graduate => { %>
+        <%- include ('../partials/graduate-list-single', {graduate: graduate}) %>
+    <% }) %>
+    
+</div>
+
+
+
+<%- include('../partials/footer') -%> 
