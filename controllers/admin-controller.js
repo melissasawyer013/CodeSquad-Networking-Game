@@ -57,7 +57,7 @@ module.exports = {
                     if(err) {
                         return err;
                     } else {
-                        res.render('pages/graduates-list', {graduates: graduates});
+                        res.render('pages/graduates-list', {graduates: graduates, user: req.user});
                     };
                 })      
             } else {
@@ -76,7 +76,7 @@ module.exports = {
                     if(err) {
                         return err;
                     } else {
-                        res.render('pages/admin-graduate-edit', {foundGraduate: foundGraduate});
+                        res.render('pages/admin-graduate-edit', {foundGraduate: foundGraduate, user: req.user});
                     };
                 })
             } else {

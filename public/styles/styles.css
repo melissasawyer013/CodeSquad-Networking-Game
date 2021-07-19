@@ -232,12 +232,35 @@ footer li a:active {
 
 /* Content */
 .container-content {
-    min-height: 800px;
+    min-height: 400px;
     width: 60%;
     border: var(--red) 3px solid;
     margin: 10% 0;
     padding: 2% 5%;
-    /* background-color: var(--light-grey); */
+    font-size: 1.3rem;
+    line-height: 1.4;
+    background-color: var(--light-grey);
+    letter-spacing: .5px;
+    color: var(--black);
+}
+
+.container-content a:link,
+.container-content a:visited {
+    color: var(--dark-grey);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.container-content a:hover,
+.container-content a:active {
+    color: var(--red);
+    text-decoration: underline;
+}
+
+.container-content h1 {
+    text-align: center;
+    color: var(--red);
+    text-shadow: 3px 2px var(--white);
 }
 
 .container-graduate-list-row {
