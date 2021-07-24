@@ -19,6 +19,13 @@ router.route('/auth/github/callback')
 router.route('/logout')
     .get(profileController.logout)
 
+router.route('/updateGameTask/:id')
+    .post(profileController.updateGameTask)
+
+router.route('/updateGraduateTask/:id/:date')
+    .get(profileController.updateGraduateTask)
+
+
 
 
 

@@ -1,0 +1,15 @@
+<tr>
+    <form action="/profile/updateGameTask/<%= task._id %>" method="POST">
+        <td><input type="submit" value="ADD" class="button-submit"></td>
+
+        <td><%= task.task %></td>
+
+        <td class="text-center"> <%= task.points %></td>
+
+        <% let date = new Date; %>
+        <% let dateValue = date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString().padStart(2, 0) + '-' + date.getDate().toString().padStart(2, 0) %>
+        
+        <td><input type="date" name="dateCompleted" value="<%= dateValue %>"></td>
+</form>
+</tr>
+    

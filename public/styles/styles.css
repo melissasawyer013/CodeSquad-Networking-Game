@@ -76,7 +76,7 @@ nav {
 }
 
 /* Navigation Media Queries */
-@media screen and (min-width: 1px) and (max-width: 1200px) {
+@media screen and (min-width: 1px) and (max-width: 1250px) {
     .container-nav-list {
         display: none;
     }
@@ -242,17 +242,23 @@ footer li a:active {
     background-color: var(--light-grey);
     letter-spacing: .5px;
     color: var(--black);
+    display: flex;
+    flex-direction: column;
 }
 
-.container-content a:link,
-.container-content a:visited {
+.text-center {
+    text-align: center;
+}
+
+.container-content-link:link,
+.container-content-link:visited {
     color: var(--dark-grey);
     font-weight: bold;
     text-decoration: none;
 }
 
-.container-content a:hover,
-.container-content a:active {
+.container-content-link:hover,
+.container-content-link:active {
     color: var(--red);
     text-decoration: underline;
 }
@@ -263,16 +269,204 @@ footer li a:active {
     text-shadow: 3px 2px var(--white);
 }
 
+.container-form {
+    width: 98%;
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+}
+
+.container-form-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.container-form-label {
+    width: 35%;
+    text-align: right;
+    margin-right: 2%;
+}
+
+.container-form-label span {
+    font-size: 1.3rem;
+    line-height: 1.4;
+}
+
+.container-form-input {
+    width: 55%;
+    min-width: 180px;
+}
+
+.container-form-input-select {
+    position: relative;
+    font-family: 'Lato', Lato, sans-serif;
+    width: 55%;
+    min-width: 180px;
+}
+
+.container-form-input-select select {
+    width: 80%;
+    font-size: 1.1rem;
+}
+
+.container-form-input input {
+    height: 20px;
+    width: 80%;
+    font-size: 1.1rem;
+}
+
+.container-form-input textarea {
+    width: 78%;
+    height: 8rem;
+    font-size: 1.1rem;
+}
+
+.container-form-input input[type=radio] {
+    width: 10%;
+    font-size: 1.3rem;
+}
+
+.container-button-submit {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.button-submit {
+    font-size: 1.3rem;
+    padding: 1%;
+    color: var(--white);
+    background-color: var(--red);
+    border-width: 2px;
+    border-style: outset;
+    border-color: var(--white);
+}
+
 .container-graduate-list-row {
     width: 80%;
     display: flex;
     flex-direction: row;
+    margin: 10px 0;
 }
 
-.container-graduate-list-row img {
+.image-graduate-list {
     width: 100px;
     height: auto;
+    display: block;
+    margin: 0 auto;
+    border: solid 1px var(--grey);
 }
+
+.container-buttons-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center ;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.container-buttons-row a {
+    margin: 0 25px 25px 25px;
+    vertical-align: middle;
+}
+
+.container-table {
+    overflow-x: scroll;
+}
+
+table {
+    width: 100%;
+}
+
+table, th, td {
+    border: 2px solid var(--red);
+    /* border: 2px solid var(--dark-grey); */
+    border-collapse: collapse;
+}
+
+th {
+    font-size: 1.1rem;
+    background-color: var(--red);
+    color: var(--white);
+    border: 2px solid var(--black);
+}
+
+th, td {
+    padding: 5px;
+}
+
+tr {
+    height: 70px;
+}
+
+.link-button {
+    width: fit-content;
+    padding: 5px 10px;
+    /* background-color: var(--red); */
+    /* border-radius: 10%; */
+    border: var(--red) solid 2px;
+}
+
+.link-button:link,
+.link-button:visited {
+    text-decoration: none;
+    color: var(--red);
+}
+
+.link-button:hover, 
+.link-button:active {
+    text-decoration: none;
+    color: var(--white);
+    background-color: var(--red);
+}
+
+.container-game-heading {
+    border-top: var(--dark-grey) solid 2px;
+    border-right: var(--dark-grey) solid 2px;
+    border-left: var(--dark-grey) solid 2px;
+    color: var(--white);
+    background-color: var(--red);
+}
+
+.container-game-heading h2 {
+    text-align: center;
+    color: var(--white);
+    text-shadow: 3px 2px var(--dark-grey);
+}
+
+.container-table-game {
+    overflow-x: scroll;
+}
+
+.container-table-game table, 
+.container-table-game th, 
+.container-table-game td {
+    border: 2px solid var(--dark-grey);
+    border-collapse: collapse;
+}
+
+th {
+    font-size: 1.1rem;
+    background-color: var(--red);
+    color: var(--white);
+    border: 2px solid var(--black);
+}
+
+th, td {
+    padding: 5px;
+}
+
+tr {
+    height: 70px;
+}
+
+
+
 
 
 

@@ -14,6 +14,10 @@ const scoreSchema = new Schema({
         type: String,
         required: true
     },
+    points: {
+        type: Number,
+        required: true
+    },
     dateCompleted: {
         type: Date,
         required: true
@@ -26,6 +30,6 @@ const scoreSchema = new Schema({
     timestamps: true
 });
 
-const Score = mongoose.model('Score', scoresSchema);
+const Score = mongoose.model('Score', scoreSchema);
 
 module.exports = Score;

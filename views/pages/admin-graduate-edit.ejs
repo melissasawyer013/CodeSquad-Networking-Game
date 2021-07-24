@@ -3,54 +3,98 @@
 
 <div class="container-content">
     <h1>Edit <%= foundGraduate.name %>'s Information </h1>
-    <a href="/admin/graduatesList">Back to Graduate List</a>
-    <form action="/admin/graduateEdit/<%= foundGraduate._id %>?_method=PUT " method="POST" enctype="application/x-www-form-urlencoded">
-        <label for="name">Full Name:</label>
-        <input type="text" id="name" name="name" value="<%=foundGraduate.name%>">
-        <br /> <br />
+    <div class="container-buttons-row">
+        <a href="/admin" class="link-button">Back to Admin Dashboard</a>
+        <a href="/admin/graduatesList" class="link-button">See Graduates List</a>
+    </div>
+    <div class="container-form">
+        <form action="/admin/graduateEdit/<%= foundGraduate._id %>?_method=PUT " method="POST" enctype="application/x-www-form-urlencoded">
+            <div class="container-form-row">
+                <div class="container-form-label">
+                    <label for="name">Full Name:</label>
+                </div>
+                <div class="container-form-input">
+                    <input type="text" id="name" name="name" value="<%=foundGraduate.name%>">
+                </div>
+            </div>
 
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email" value="<%=foundGraduate.email%>">
-        <br /> <br />
+            <div class="container-form-row">
+                <div class="container-form-label">
+                    <label for="email">Email:</label>
+                </div>
+                <div class="container-form-input">
+                    <input type="text" id="email" name="email" value="<%=foundGraduate.email%>">
+                </div>
+            </div>
+    
+            <div class="container-form-row">
+                <div class="container-form-label">
+                    <label for="cohortYear">Cohort Year:</label>
+                </div>
+                <div class="container-form-input">
+                    <input type="text" id="cohortYear" name="cohortYear" value="<%=foundGraduate.cohortYear%>">
+                </div>
+            </div>
+            
+            <div class="container-form-row">
+                <div class="container-form-label">
+                    <label for="photoUrl">Photo URL Path:</label>
+                </div>
+                <div class="container-form-input">
+                    <input type="text" id="photoUrl" name="photoUrl" value="<%=foundGraduate.photoUrl%>">
+                </div>
+            </div>        
+            
+            <div class="container-form-row">
+                <div class="container-form-label">
+                    <label for="githubUrl">GitHub URL:</label>
+                </div>
+                <div class="container-form-input">
+                    <input type="text" id="githubUrl" name="githubUrl" value="<%=foundGraduate.githubUrl%>">
+                </div>
+            </div>
+    
+            <div class="container-form-row">
+                <div class="container-form-label">
+                    <label for="linkedinUrl">LinkedIn URL:</label>
+                </div>
+                <div class="container-form-input">
+                    <input type="text" id="linkedinUrl" name="linkedinUrl" value="<%=foundGraduate.linkedinUrl%>">
+                </div>
+            </div>
+    
+            <div class="container-form-row">
+                <div class="container-form-label">
+                    <span>Admin Status:</span>
+                </div>
+                <div class="container-form-input">
+                    <input type="radio" id="adminYes" name="adminStatus" value="Admin" 
+                    <% if(foundGraduate.adminStatus === "Admin") { %>
+                        checked
+                    <% } %>
+                    >
+                    <label for="adminYes">Admin</label>
 
-        <label for="cohortYear">Cohort Year:</label>
-        <input type="text" id="cohortYear" name="cohortYear" value="<%=foundGraduate.cohortYear%>">
-        <br /> <br />
-
-        <label for="photoUrl">Photo URL Path:</label>
-        <input type="text" id="photoUrl" name="photoUrl" value="<%=foundGraduate.photoUrl%>">
-        <br /> <br />
-
-        <label for="githubUrl">GitHub URL:</label>
-        <input type="text" id="githubUrl" name="githubUrl" value="<%=foundGraduate.githubUrl%>">
-        <br /> <br />
-
-        <label for="linkedinUrl">LinkedIn URL:</label>
-        <input type="text" id="linkedinUrl" name="linkedinUrl" value="<%=foundGraduate.linkedinUrl%>">
-        <br /> <br />
-
-        <p>Admin Status</p>
-        <input type="radio" id="adminYes" name="adminStatus" value="Admin" 
-        <% if(foundGraduate.adminStatus === "Admin") { %>
-            checked
-        <% } %>
-        >
-        <label for="adminYes">Admin</label>
-        <input type="radio" id="adminNo" name="adminStatus" value="Not an Admin" 
-        <% if(foundGraduate.adminStatus == "Not an Admin") { %>
-            checked
-        <% } %> >
-        <label for="adminNo">Not an Admin</label>
-        <br /> <br />
-
-        <p>Need to include total points: <%= foundGraduate.totalPoints %> </p>
-
-        <p>Need to include tasksCompleted: <%= foundGraduate.tasksCompleted %> </p>
-
-        <input type="submit">
-
-
-    </form>
+                    <input type="radio" id="adminNo" name="adminStatus" value="Not an Admin" 
+                    <% if(foundGraduate.adminStatus == "Not an Admin") { %>
+                        checked
+                    <% } %> 
+                    >
+                    <label for="adminNo">Not an Admin</label>
+                </div>
+            </div>
+    
+            <p>Need to include total points: <%= foundGraduate.totalPoints %> </p>
+    
+            <p>Need to include tasksCompleted: <%= foundGraduate.tasksCompleted %> </p>
+    
+            <div class="container-button-submit">
+                <input type="submit" class="button-submit">
+            </div>
+    
+        </form>
+    </div>
+    
 
     
 </div>

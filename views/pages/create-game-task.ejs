@@ -1,0 +1,58 @@
+<%- include('../partials/head') -%>
+<%- include('../partials/navbar') -%>
+
+<div class="container-content">
+    <h1>Create a Game Task</h1>
+    <div class="container-buttons-row">
+        <a href="/admin" class="link-button">Back to Admin Dashboard</a>
+        <a href="/admin/gameTasksList" class="link-button">See Game Tasks List</a>
+    </div>
+    <div class="container-form">
+        <form action="/admin/createGameTask" method="POST">
+
+            <div class="container-form-row">
+                <div class="container-form-label">
+                    <label for="category">Category:</label>
+                </div>
+                <div class="container-form-input-select">
+                    <select name="category" id="category">
+                        <option value="basics">basics</option>
+                        <option value="profile">profile</option>
+                        <option value="learning">learning</option>
+                        <option value="portfolio">portfolio</option>
+                        <option value="network">network</option>
+                        <option value="jobs">jobs</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="container-form-row">
+                <div class="container-form-label">
+                    <label for="task">Task:</label>
+                </div>
+                <div class="container-form-input">
+                    <textarea name="task" id="task"></textarea>
+                </div>
+            </div>            
+
+            <div class="container-form-row">
+                <div class="container-form-label">
+                    <label for="points">Points:</label>
+                </div>
+                <div class="container-form-input">
+                    <input type="number" name="points" id="points">
+                </div>
+            </div>  
+
+            <div class="container-button-submit">
+                <input type="submit" class="button-submit">
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+
+
+<%- include('../partials/footer') -%> 

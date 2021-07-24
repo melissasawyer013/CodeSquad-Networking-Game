@@ -6,12 +6,22 @@
     <% if(message != undefined) { %>
         <p> <%= message %> </p>
     <% } %> 
-    <form action="/profile/login" method="POST">
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email" placeholder="Email">
-        <br /> <br />
-        <input type="submit" value="Login with GitHub">
-    </form>  
+    <div class="container-form">
+        <form action="/profile/login" method="POST">
+            <div class="container-form-row">
+                <div class="container-form-label">
+                    <label for="email">Email:</label>
+                </div>
+                <div class="container-form-input">
+                    <input type="text" id="email" name="email" placeholder="Email">
+                </div>
+            </div>
+            <div class="container-button-submit">
+                <input type="submit" value="Login with GitHub" class="button-submit">
+            </div>
+        </form>
+    </div>
+      
 </div>
 
 <%- include('../partials/footer') -%> 

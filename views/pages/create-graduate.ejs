@@ -2,43 +2,90 @@
 <%- include('../partials/navbar') -%>
 
 <div class="container-content">
-    <h1>Create Graduate Page</h1>
-    <form action="/admin/createGraduate" method="POST">
-        <label for="name">Full Name:</label>
-        <input type="text" id="name" name="name" placeholder="Full Name">
-        <br /> <br />
+    <h1>Create Graduate In Database</h1>
+    <div class="container-buttons-row">
+        <a href="/admin" class="link-button">Back to Admin Dashboard</a>
+        <a href="/admin/graduatesList" class="link-button">See Graduates List</a>
+    </div>
+    <div class="container-form">
+        <form action="/admin/createGraduate" method="POST" >
 
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email" placeholder="Email">
-        <br /> <br />
+            <div class="container-form-row">
+                <div class="container-form-label">
+                    <label for="name" class="container-form-label">Full Name:</label>
+                </div>
+                <div class="container-form-input">
+                    <input type="text" id="name" name="name" placeholder="Full Name">
+                </div>
+            </div>
 
-        <label for="cohortYear">Cohort Year:</label>
-        <input type="text" id="cohortYear" name="cohortYear" placeholder="Cohort Year">
-        <br /> <br />
+            <div class="container-form-row">
+                <div class="container-form-label">
+                    <label for="email" class="container-form-label">Email:</label>
+                </div>
+                <div class="container-form-input">
+                    <input type="text" id="email" name="email" placeholder="Email">
+                </div>
 
-        <label for="photoUrl">Photo URL Path:</label>
-        <input type="text" id="photoUrl" name="photoUrl" placeholder="Photo URL Path">
-        <br /> <br />
+            </div>
+    
+            <div class="container-form-row">
+                <div class="container-form-label">
+                    <label for="cohortYear">Cohort Year:</label>
+                </div>
+                <div class="container-form-input">
+                    <input type="text" id="cohortYear" name="cohortYear" placeholder="Cohort Year">
+                </div>
+            </div>
+    
+            
+            
 
-        <label for="githubUrl">GitHub URL:</label>
-        <input type="text" id="githubUrl" name="githubUrl" placeholder="GitHub URL">
-        <br /> <br />
+            <div class="container-form-row">
+                <div class="container-form-label">
+                    <label for="photoUrl">Photo URL Path:</label>
+                </div>
+                <div class="container-form-input">
+                    <input type="text" id="photoUrl" name="photoUrl" placeholder="Photo URL Path">
+                </div>
+            </div>
+    
+            <div class="container-form-row">
+                <div class="container-form-label">
+                    <label for="githubUrl">GitHub URL:</label>
+                </div>
+                <div class="container-form-input">
+                    <input type="text" id="githubUrl" name="githubUrl" placeholder="GitHub URL">
+                </div>
+            </div>
+    
+            <div class="container-form-row">
+                <div class="container-form-label">
+                    <label for="linkedinUrl">LinkedIn URL:</label>
+                </div>
+                <div class="container-form-input">
+                    <input type="text" id="linkedinUrl" name="linkedinUrl" placeholder="LinkedIn URL">
+                </div>
+            </div>
+    
+            <div class="container-form-row">
+                <div class="container-form-label">
+                    <span>Admin Status:</span>
+                </div>
+                <div class="container-form-input">
+                    <input type="radio" id="adminYes" name="adminStatus" value="Admin">
+                    <label for="adminYes">Admin</label>
+                    <input type="radio" id="adminNo" name="adminStatus" value="Not an Admin" checked>
+                    <label for="adminNo">Not an Admin</label>    
+                </div>
+            </div>
 
-        <label for="linkedinUrl">LinkedIn URL:</label>
-        <input type="text" id="linkedinUrl" name="linkedinUrl" placeholder="LinkedIn URL">
-        <br /> <br />
-
-        <p>Admin Status</p>
-        <input type="radio" id="adminYes" name="adminStatus" value="Admin">
-        <label for="adminYes">Admin</label>
-        <input type="radio" id="adminNo" name="adminStatus" value="Not an Admin" checked>
-        <label for="adminNo">Not an Admin</label>
-        <br /> <br />
-
-        <input type="submit">
-
-
-    </form>
+            <div class="container-button-submit">
+                <input type="submit" class="button-submit">
+            </div>
+    
+        </form>
+    </div>
 </div>
 
 

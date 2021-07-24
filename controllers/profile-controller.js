@@ -1,4 +1,6 @@
 const Graduate = require('../models/graduateSchema');
+const GameTask = require('../models/gameTaskSchema');
+const Score = require('../models/scoreSchema');
 const passport = require("passport");
 const authenticationInfo = require('../config/authorization');
 
@@ -44,7 +46,7 @@ module.exports = {
         passport.authenticate('github', { failureRedirect: 'profile/login' }),
         function(req, res) {
             if(req.isAuthenticated) {
-                res.redirect('/profile/');
+                res.redirect('/');
             } else {
                 res.redirect('/profile/logout');
             };
@@ -62,4 +64,56 @@ module.exports = {
         } 
     },
 
+    updateGameTask: (req, res) => {
+        if(req.isAuthenticated()) {
+            const { id } = req.params;
+            GameTask.findByIdAndUpdate(id, {$push: {
+                graduatesCompleted: {
+                    'name': req.user.name,
+                    'dateAdded': new Date(),
+                    'dateCompleted': req.body.dateCompleted,
+                }
+            }}, {new: true}, err => {
+                if (err) {
+                    return err;
+                } else {
+                    res.redirect(`/profile/updateGraduateTask/${id}/${req.body.dateCompleted}`);
+                }
+            })
+        }
+    },
+
+    updateGraduateTask: (req, res) => {
+        if(req.isAuthenticated()) {
+            const { id } = req.params;
+            const { date } = req.params;
+            GameTask.findOne({_id: id}, (err, gameTask) => {
+                if(err) {
+                    return err;
+                } else {
+                    let gameTaskCategory = gameTask.category;
+                    let gameTaskTask = gameTask.task;
+                    let gameTaskPoints = gameTask.points;
+                    let gradPoints = req.user.totalPoints + gameTaskPoints;
+                    Graduate.findOneAndUpdate({_id: req.user._id}, {
+                        $set: {totalPoints: gradPoints}, 
+                        $push: {
+                            tasksCompleted: {
+                                'category': gameTaskCategory,
+                                'task': gameTaskTask,
+                                'points': gameTaskPoints,
+                                'dateAdded': new Date(),
+                                'dateCompleted': date,
+                            }
+                    }}, {new: true}, error => {
+                        if(error) {
+                            return error;
+                        } else {
+                            res.redirect('/')
+                        }
+                    })
+                }
+            })
+        }
+    },
 };

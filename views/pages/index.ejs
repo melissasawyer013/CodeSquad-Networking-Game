@@ -2,17 +2,39 @@
 <%- include('../partials/navbar') -%>
 
 <div class="container-content">
-    <h1>Welcome to CodeSquad The Game</h1>
+    <h1>ADD TASKS, GET POINTS</h1>
 
-    <p>CodeSquad The Game is a web application meant to challenge CodeSquad graduates to continue their web development journey. You must be a CodeSquad graduate to play, but if you're not, head over to <a href="http://codesquad.org/students.html" target="_blank" rel="noopener noreferrer">CodeSquad.org</a> to learn more about our free web development bootcamp.</p>
+    <% if(user === undefined) { %>
+        <p>
+            You must <a href="/profile/login" class="container-content-link">login</a> to earn points. See the <a href="/about" class="container-content-link">About</a> page to learn more.
+        </p>                 
+    <% } else { %>
+        <p>Welcome <%= user.name %>! Check off the tasks you've completed below in order to score points.</p>
+        
+        <div class="container-game-heading">
+            <h2>Start with the BASICS.</h2>
+        </div>
+        
+        <div class="container-table-game">
+            <table>
+                <!-- <th>CATEGORY</th> -->
+                <!-- <th>TASK</th> -->
+                <!-- <th>POINTS</th> -->
 
-    <p>For graduates, start by <a href="/profile/login">logging in</a>. First you'll enter the email address you have associated with CodeSquad. Then you'll be able to authenticate yourself with GitHub. If you are unsure what email we're using for your account, email Melissa (melissa@codesquad.org) to find out the email being used or update your preferred email address.</p>
+                <% gameList.forEach( task => { %>
+                    <% if(task.category === 'basics') { %>
+                        <%- include ('../partials/game-row', {task: task}) %>
+                    <% } %> 
+                <% }) %>
+            </table>
+        </div>
+        
 
-    <p>Once you're logged in, you'll be able to update your profile information and start logging your accomplishments. We have set up several categories, each containing specific tasks that will help you continue your web development job search and journey. </p>
 
 
 
-    <a href="/profile/login">Login</a>
+    <% } %> 
+
 </div>
 
 

@@ -1,7 +1,16 @@
+const GameTask = require('../models/gameTaskSchema');
+
 module.exports = {
     index: (req, res) => {
         if(req.isAuthenticated()) {
-            res.render('pages/index', {user: req.user})
+            GameTask.find({}, (err, gameList) => {
+                if(err) {
+                    return err;
+                } else {
+                    // console.log(gameList);
+                    res.render('pages/index', { user: req.user, gameList: gameList });
+                }
+            })
         } else {
             res.render('pages/index', {user: undefined})
         };

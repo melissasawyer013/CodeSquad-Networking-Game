@@ -1,0 +1,83 @@
+<%- include('../partials/head') -%>
+<%- include('../partials/navbar') -%>
+
+<div class="container-content">
+    <h1>Edit Game Task</h1>
+    <div class="container-buttons-row">
+        <a href="/admin" class="link-button">Back to Admin Dashboard</a>
+        <a href="/admin/gameTasksList" class="link-button">Back to Game Tasks List</a>
+    </div>
+    <div class="container-form">
+        <form action="/admin/gameTaskEdit/<%= foundGameTask._id %>?_method=PUT " method="POST" enctype="application/x-www-form-urlencoded">
+            <div class="container-form-row">
+                <div class="container-form-label">
+                    <label for="category">Category:</label>
+                </div>
+                <div class="container-form-input-select">
+                    <select name="category" id="category">
+                        <option value="basics"
+                            <% if(foundGameTask.category === "basics") { %>
+                                selected
+                            <% } %> 
+                        >basics</option>
+                        <option value="profile"
+                            <% if(foundGameTask.category === "profile") { %>
+                                selected
+                            <% } %> 
+                        >profile</option>
+                        <option value="learning"
+                            <% if(foundGameTask.category === "learning") { %>
+                                selected
+                            <% } %> 
+                        >learning</option>
+                        <option value="portfolio"
+                            <% if(foundGameTask.category === "portfolio") { %>
+                                selected
+                            <% } %> 
+                        >portfolio</option>
+                        <option value="network"
+                            <% if(foundGameTask.category === "network") { %>
+                                selected
+                            <% } %> 
+                        >network</option>
+                        <option value="jobs"
+                            <% if(foundGameTask.category === "jobs") { %>
+                                selected
+                            <% } %> 
+                        >jobs</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="container-form-row">
+                <div class="container-form-label">
+                    <label for="task">Task:</label>
+                </div>
+                <div class="container-form-input">
+                    <textarea name="task" id="task"><%= foundGameTask.task %> </textarea>
+                </div>
+            </div>
+
+            <div class="container-form-row">
+                <div class="container-form-label">
+                    <label for="points">Points:</label>
+                </div>
+                <div class="container-form-input">
+                    <input type="number" name="points" id="points" value="<%= foundGameTask.points %>">
+                </div>
+            </div>
+            
+            <div class="container-button-submit">
+                <input type="submit" class="button-submit">
+            </div>
+            
+        </form>
+    </div>
+    
+
+    
+</div>
+
+
+
+<%- include('../partials/footer') -%> 

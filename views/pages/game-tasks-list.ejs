@@ -2,27 +2,26 @@
 <%- include('../partials/navbar') -%>
 
 <div class="container-content">
-    <h1>Graduates List</h1>
+    <h1>Game Tasks Page</h1>
     <div class="container-buttons-row">
         <a href="/admin" class="link-button">Back to Admin Dashboard</a>
-        <a href="/admin/createGraduate" class="link-button">Add a Graduate to Database</a>
+        <a href="/admin/createGameTask" class="link-button">Create a Game Task</a>
     </div>
     
     <div class="container-table">
         <table>
-            <th>HEADSHOT</th>
-            <th>NAME</th>
-            <th>COHORT</th>
+            <th>CATEGORY</th>
+            <th>TASK</th>
+            <th>POINTS</th>
             <th>CONTROLS</th>
-            
-            <% graduates.forEach( graduate => { %>
-                <%- include ('../partials/graduate-list-single', {graduate: graduate}) %>
+            <% gameTasks.forEach( gameTask => { %>
+                <%- include ('../partials/game-task-single', {gameTask: gameTask}) %>
             <% }) %>
-        
         </table>
-
     </div>
 
+    
+    
     
 </div>
 
