@@ -154,6 +154,7 @@ module.exports = {
                     task: req.body.task,
                     points: req.body.points,
                     graduatesCompleted: [],
+                    maxRate: req.body.maxRate,
                 });
                 newGameTask.save();
                 console.log(`newGameTask: ${newGameTask}`);
@@ -193,7 +194,7 @@ module.exports = {
                     category: req.body.category,
                     task: req.body.task,
                     points: req.body.points,
-                    //graduatesCompleted need added here
+                    maxRate: req.body.maxRate,
                 }}, { new: true }, err => {
                     if (err) {
                         return err;

@@ -26,9 +26,4 @@ router.route('/updateGraduateTask/:id/:date')
     .get(profileController.updateGraduateTask)
 
 
-
-
-
-
-
 module.exports = router;

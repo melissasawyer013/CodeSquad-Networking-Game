@@ -16,6 +16,10 @@ const gameTaskSchema = new Schema({
     },
     graduatesCompleted: {
         type: Array,
+    },
+    maxRate: {
+        type: String,
+        required: true
     }
 });
 

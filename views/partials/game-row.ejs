@@ -1,15 +1,23 @@
-<tr>
+<% let date = new Date; %>
+<% let dateValue = date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString().padStart(2, 0) + '-' + date.getDate().toString().padStart(2, 0) %> 
+
+
+<div class="container-game-row">
     <form action="/profile/updateGameTask/<%= task._id %>" method="POST">
-        <td><input type="submit" value="ADD" class="button-submit"></td>
+        <div class="container-game-row-small">
+            <div class="container-game-row-controls">
+                <span class="text-center">points: <%= task.points %></span> 
+                <input type="submit" value="ADD" class="button-submit">
+            </div>
+            <div class="container-game-row-task">
+                <%= task.task %>
+            </div>
+        </div>
+        <div class="container-game-date">
+            <label for="dateCompleted">Date Completed: </label>
+            <input type="date" name="dateCompleted" id="dateCompleted" value="<%= dateValue %>">
+        </div>
+    </form>
+</div>
 
-        <td><%= task.task %></td>
-
-        <td class="text-center"> <%= task.points %></td>
-
-        <% let date = new Date; %>
-        <% let dateValue = date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString().padStart(2, 0) + '-' + date.getDate().toString().padStart(2, 0) %>
-        
-        <td><input type="date" name="dateCompleted" value="<%= dateValue %>"></td>
-</form>
-</tr>
     

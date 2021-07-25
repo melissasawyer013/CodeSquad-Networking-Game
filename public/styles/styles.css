@@ -209,6 +209,7 @@ footer li a:active {
     margin-bottom: 2px;
 }
 
+/* Footer Media Queries */
 @media screen and (min-width: 1px) and (max-width: 394px) {
     .container-footer-content {
         margin: 20px 0;
@@ -407,8 +408,6 @@ tr {
 .link-button {
     width: fit-content;
     padding: 5px 10px;
-    /* background-color: var(--red); */
-    /* border-radius: 10%; */
     border: var(--red) solid 2px;
 }
 
@@ -426,17 +425,211 @@ tr {
 }
 
 .container-game-heading {
-    border-top: var(--dark-grey) solid 2px;
-    border-right: var(--dark-grey) solid 2px;
-    border-left: var(--dark-grey) solid 2px;
+    border: var(--dark-grey) solid 2px;
     color: var(--white);
     background-color: var(--red);
+    width: 100%;
 }
 
 .container-game-heading h2 {
     text-align: center;
     color: var(--white);
     text-shadow: 3px 2px var(--dark-grey);
+    margin: 10px;
+}
+
+.container-game-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    border-left: var(--dark-grey) 2px solid;
+    border-right: var(--dark-grey) 2px solid;
+    border-top: var(--dark-grey) 1px solid;
+    border-bottom: var(--dark-grey) 1px solid;;
+}
+
+.container-game-row form {
+    display: flex;
+    width: 100%;
+}
+
+.container-game-row-task {
+    width: 75%;
+    margin-left: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.text-strikethrough {
+    text-decoration: line-through;
+}
+
+.background-color-light-grey {
+    background-color: var(--light-grey);
+}
+
+.container-game-row-small {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+}
+
+.container-game-date {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    color: var(--red);
+    justify-content: center;
+    margin: 10px 10px 10px 0;
+}
+
+.container-game-row-controls {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.container-game-row-controls span {
+    color: var(--red);
+    margin: 3px 0;
+}
+
+.container-game-row-controls input {
+    margin: 3px 0;
+}
+
+.container-game-row-controls input[type=submit] {
+    width: fit-content;
+    padding: 8px;
+    align-self: center;
+}
+
+@media screen and (min-width: 1px) and (max-width: 550px) {
+    .container-game-row {
+        display: flex;
+        flex-direction: column;;
+    }
+
+    .container-game-row form {
+        display: block;
+    }
+
+    .container-game-row-small {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .container-game-row-task {
+        max-width: 90%;
+        width: 90%;
+        /* padding: 10px 25px;
+        margin: 0 10px; */
+        word-wrap: wrap;
+    }
+    
+    .container-game-date {
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 10px 0 15px 0;
+    }
+    
+    .container-game-row-controls {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+}
+
+@media screen and (min-width: 551px) and (max-width: 734px) {
+    .container-game-row {
+        display: flex;
+        flex-direction: column;;
+    }
+
+    .container-game-row form {
+        display: block;
+    }
+
+    .container-game-row-small {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .container-game-row-task {
+        width: 95%;
+    }
+    
+    .container-game-date {
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+        margin: 10px 0 15px 0;
+    }
+
+    .container-game-date label {
+        margin-right: 10px;
+    }
+    
+    .container-game-row-controls {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+}
+
+@media screen and (min-width: 735px) and (max-width: 1120px) {
+    .container-game-row {
+        display: flex;
+        flex-direction: column;;
+    }
+
+    .container-game-row form {
+        display: block;
+    }
+
+    .container-game-row-small {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+    
+    .container-game-row-column {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .container-game-row-task {
+        width: 80%;
+    }
+    
+    .container-game-date {
+        width: 100%;
+        flex-direction: row;
+        margin: 15px;
+    }
+    
+    .container-game-row-controls {
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container-game-date label {
+        margin-right: 10px;
+    }
 }
 
 .container-table-game {

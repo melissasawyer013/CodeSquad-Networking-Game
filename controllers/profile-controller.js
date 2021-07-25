@@ -71,6 +71,7 @@ module.exports = {
                 graduatesCompleted: {
                     'name': req.user.name,
                     'dateAdded': new Date(),
+                    'dateEdited': new Date(),
                     'dateCompleted': req.body.dateCompleted,
                 }
             }}, {new: true}, err => {
@@ -94,6 +95,7 @@ module.exports = {
                     let gameTaskCategory = gameTask.category;
                     let gameTaskTask = gameTask.task;
                     let gameTaskPoints = gameTask.points;
+                    let gameMaxRate = gameTask.maxRate;
                     let gradPoints = req.user.totalPoints + gameTaskPoints;
                     Graduate.findOneAndUpdate({_id: req.user._id}, {
                         $set: {totalPoints: gradPoints}, 
@@ -102,7 +104,9 @@ module.exports = {
                                 'category': gameTaskCategory,
                                 'task': gameTaskTask,
                                 'points': gameTaskPoints,
+                                'maxRate': gameMaxRate,
                                 'dateAdded': new Date(),
+                                'dateEdited': new Date(),
                                 'dateCompleted': date,
                             }
                     }}, {new: true}, error => {

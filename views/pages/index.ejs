@@ -10,31 +10,56 @@
         </p>                 
     <% } else { %>
         <p>Welcome <%= user.name %>! Check off the tasks you've completed below in order to score points.</p>
-        
+        <h2 class="text-center">YOUR TOTAL POINTS: <%= user.totalPoints %> </h2>
         <div class="container-game-heading">
             <h2>Start with the BASICS.</h2>
         </div>
-        
-        <div class="container-table-game">
-            <table>
-                <!-- <th>CATEGORY</th> -->
-                <!-- <th>TASK</th> -->
-                <!-- <th>POINTS</th> -->
-
-                <% gameList.forEach( task => { %>
-                    <% if(task.category === 'basics') { %>
-                        <%- include ('../partials/game-row', {task: task}) %>
-                    <% } %> 
-                <% }) %>
-            </table>
+        <% gameList.forEach( task => { %>
+            <% if(task.category === 'basics') { %>
+                <%- include ('../partials/game-row', {task: task}) %>
+            <% } %> 
+        <% }) %>
+        <div class="container-game-heading">
+            <h2>Improve your PROFILE.</h2>
         </div>
-        
-
-
-
-
+        <% gameList.forEach( task => { %>
+            <% if(task.category === 'profile') { %>
+                <%- include ('../partials/game-row', {task: task, user: user}) %>
+            <% } %> 
+        <% }) %>
+        <div class="container-game-heading">
+            <h2>Continue your LEARNING.</h2>
+        </div>
+        <% gameList.forEach( task => { %>
+            <% if(task.category === 'learning') { %>
+                <%- include ('../partials/game-row', {task: task}) %>
+            <% } %> 
+        <% }) %>
+        <div class="container-game-heading">
+            <h2>Build your PORTFOLIO.</h2>
+        </div>
+        <% gameList.forEach( task => { %>
+            <% if(task.category === 'portfolio') { %>
+                <%- include ('../partials/game-row', {task: task}) %>
+            <% } %> 
+        <% }) %>
+        <div class="container-game-heading">
+            <h2>Extend your NETWORK.</h2>
+        </div>
+        <% gameList.forEach( task => { %>
+            <% if(task.category === 'network') { %>
+                <%- include ('../partials/game-row', {task: task}) %>
+            <% } %> 
+        <% }) %>
+        <div class="container-game-heading">
+            <h2>Apply for JOBS.</h2>
+        </div>
+        <% gameList.forEach( task => { %>
+            <% if(task.category === 'jobs') { %>
+                <%- include ('../partials/game-row', {task: task}) %>
+            <% } %> 
+        <% }) %>
     <% } %> 
-
 </div>
 
 
