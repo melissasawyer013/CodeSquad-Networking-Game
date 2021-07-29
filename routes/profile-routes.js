@@ -29,8 +29,13 @@ router.route('/editProfile/:id')
     .get(profileController.editProfile)
     .put(profileController.updateProfile)
 
-router.route('/updateTaskDate/:id') 
-    .put(profileController.updateTaskDate)
+router.route('/checkUpdateTaskDate/:id/:maxRate/:task')
+    .put(profileController.checkUpdateTaskDate)
+
+// router.route('/updateTaskDate/:id') 
+router.route('/updateTaskDate/:id/:newDate') 
+    // .put(profileController.updateTaskDate)
+    .get(profileController.updateTaskDate)
 
 router.route('/updateGameTaskGradDate/:id/:date/:task')
     .get(profileController.updateGameTaskGradDate)
