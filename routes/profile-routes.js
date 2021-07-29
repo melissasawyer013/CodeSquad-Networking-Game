@@ -29,21 +29,21 @@ router.route('/editProfile/:id')
     .get(profileController.editProfile)
     .put(profileController.updateProfile)
 
-router.route('/checkUpdateTaskDate/:id/:maxRate/:task')
+router.route('/checkUpdateTaskDate/:id/:maxRate/:task/:redirect')
     .put(profileController.checkUpdateTaskDate)
 
 // router.route('/updateTaskDate/:id') 
-router.route('/updateTaskDate/:id/:newDate') 
+router.route('/updateTaskDate/:id/:newDate/:redirect') 
     // .put(profileController.updateTaskDate)
     .get(profileController.updateTaskDate)
 
-router.route('/updateGameTaskGradDate/:id/:date/:task')
+router.route('/updateGameTaskGradDate/:id/:date/:task/:redirect')
     .get(profileController.updateGameTaskGradDate)
 
-router.route('/deleteTask/:id')
+router.route('/deleteTask/:id/:redirect')
     .get(profileController.deleteGradTask)
 
-router.route('/deleteGameTaskGrad/:id/:task')
+router.route('/deleteGameTaskGrad/:id/:task/:redirect')
     .get(profileController.deleteTaskGrad)
 
 

@@ -157,23 +157,31 @@ module.exports = {
             let { id } = req.params;
             let { maxRate } = req.params;
             let { task } = req.params;
+            let { redirect } = req.params;
             //check incoming date change requests - if maxRate is 'daily' the task can only be done once per day and the route needs to check that the same task hasn't already been completed on the day the user is changing the date completed to
             if (maxRate === 'daily') {
                 let tasksCompletedArray = req.user.tasksCompleted;
                 for( let i = 0; i < tasksCompletedArray.length; i++) {
                     //for each task in tasksCompleted array in database, flag
                     if (task === tasksCompletedArray[i].task && req.body.dateCompleted === tasksCompletedArray[i].dateCompleted) {
-//Eventually have profile accept messages and send a message that they can't change the date completed to that date because the same task has already been completed on that day, and you can only do it once per day.
-                        res.redirect('/profile');
-                        //Without the return err, got error: Cannot set headers after they are sent to the client.
-                        return err;
-                        break;
+//Eventually have profile/homepage accept messages and send a message that they can't change the date completed to that date because the same task has already been completed on that day, and you can only do it once per day.
+                        if(redirect === 'profile') {
+                            res.redirect('/profile');
+                            //Without the return err, got error: Cannot set headers after they are sent to the client.
+                            return err;
+                            break;
+                        } else if (redirect === 'game') {
+                            res.redirect('/');
+                            //Without the return err, got error: Cannot set headers after they are sent to the client.
+                            return err;
+                            break;
+                        }
                     };
                 };
                 // if there are no date conflicts, routed to next step
-                res.redirect(`/profile/updateTaskDate/${id}/${req.body.dateCompleted}`);
+                res.redirect(`/profile/updateTaskDate/${id}/${req.body.dateCompleted}/${redirect}`);
             } else {
-                res.redirect(`/profile/updateTaskDate/${id}/${req.body.dateCompleted}`);
+                res.redirect(`/profile/updateTaskDate/${id}/${req.body.dateCompleted}/${redirect}`);
             }
         } else {
             res.render('pages/login', {message: `You must be logged in to edit this date.`, user: undefined});
@@ -185,6 +193,7 @@ module.exports = {
             //id being passed as parameter is the id of the object inside of the tasksCompleted array in the gradudate's database entry
             let { id } = req.params;
             let { newDate } = req.params;
+            let { redirect } = req.params;
             let tasksCompletedArray = req.user.tasksCompleted;
             let indexToChange;
             //used this method instead of findByIdAndUpdate because could not get $set to update subdocuments. 
@@ -192,7 +201,11 @@ module.exports = {
                 if(!err) {
                     if(!result){
                         console.log('no result found');
-                        res.redirect('/profile');
+                        if (redirect === 'profile') {
+                            res.redirect('/profile');
+                        } else if (redirect === 'game') {
+                            res.redirect('/');
+                        };   
                     } else {
                         tasksCompletedArray.forEach(task => {
                             if(id == task._id) {
@@ -206,7 +219,7 @@ module.exports = {
                                         return saveErr;
                                     } else {
                                         //redirects to route that will update the GameTask entry array where grads who have completed the task + date they completed it are stored - passes in parameters for 1) the id of the tasksCompleted object (which matches the id in the gametasks's graduatesCompleted object), 2) the new date completed, and 3) the task string
-                                        res.redirect(`/profile/updateGameTaskGradDate/${id}/${newDate}/${result.tasksCompleted[indexToChange].task}`);
+                                        res.redirect(`/profile/updateGameTaskGradDate/${id}/${newDate}/${result.tasksCompleted[indexToChange].task}/${redirect}`);
                                     };
                                 });  
                             };
@@ -221,54 +234,11 @@ module.exports = {
         };
     },
 
-
-//working route, no check for date on maxRate: "daily"
-//     updateTaskDate: (req, res) => {
-//         if(req.isAuthenticated()) {
-//             //id being passed as parameter is the id of the object inside of the tasksCompleted array in the gradudate's database entry
-//             let { id } = req.params;
-//             let tasksCompletedArray = req.user.tasksCompleted;
-//             let indexToChange;
-//             //used this method instead of findByIdAndUpdate because could not get $set to update subdocuments. 
-//             Graduate.findById(req.user._id, function(err, result) {
-//                 if(!err) {
-//                     if(!result){
-//                         console.log('no result found');
-//                         res.redirect('/profile');
-//                     } else {
-//                         tasksCompletedArray.forEach(task => {
-//                             if(id == task._id) {
-//                                 //gets the location of the task in the array of tasks completed to be able to change correct task's date
-//                                 indexToChange = tasksCompletedArray.indexOf(task);
-
-// // Should eventually add in check to make sure task isn't being changed to a date that already has an entry if the maxValue: 'daily'
-//                                 //changes the date completed for the task in the database to what was entered by the user, must include the markModified on the array or changes will not save in database
-//                                 result.tasksCompleted[indexToChange].dateCompleted = req.body.dateCompleted;
-//                                 result.markModified('tasksCompleted');
-//                                 result.save(function(saveErr, saveResult) {
-//                                     if(saveErr) {
-//                                         return saveErr;
-//                                     } else {
-//                                         //redirects to route that will update the GameTask entry array where grads who have completed the task + date they completed it are stored - passes in parameters for 1) the id of the tasksCompleted object (which matches the id in the gametasks's graduatesCompleted object), 2) the new date completed, and 3) the task string
-//                                         res.redirect(`/profile/updateGameTaskGradDate/${id}/${req.body.dateCompleted}/${result.tasksCompleted[indexToChange].task}`);
-//                                     };
-//                                 });  
-//                             };
-//                         });  
-//                     };
-//                 } else {
-//                     return err;
-//                 };
-//             });
-//         } else {
-//             res.render('pages/login', {message: `You must be logged in to edit this date.`, user: undefined})
-//         };
-//     },
-
     updateGameTaskGradDate: (req, res) => {
         let { id } = req.params;
         let { date } = req.params;
-        let { task } = req.params
+        let { task } = req.params;
+        let { redirect } = req.params;
         if(req.isAuthenticated()) {
             let gradsCompletedArray;
             let indexToChange;
@@ -277,7 +247,11 @@ module.exports = {
                 if(!err) {
                     if(!result){
                         console.log('no result found');
-                        res.redirect('/profile');
+                        if (redirect === 'profile') {
+                            res.redirect('/profile');
+                        } else if (redirect === 'game') {
+                            res.redirect('/');
+                        };   
                     } else {
                         gradsCompletedArray = result.graduatesCompleted;
                         gradsCompletedArray.forEach(entry => {
@@ -291,7 +265,11 @@ module.exports = {
                                     if(saveErr) {
                                         return saveErr;
                                     } else {
-                                        res.redirect('/profile');
+                                        if (redirect === 'profile') {
+                                            res.redirect('/profile');
+                                        } else if (redirect === 'game') {
+                                            res.redirect('/');
+                                        };   
                                     };
                                 });  
                             };
@@ -309,13 +287,17 @@ module.exports = {
     deleteGradTask: (req, res) => {
         if(req.isAuthenticated()) {
             let { id } = req.params;
+            let { redirect } = req.params;
             let tasksCompletedArray = req.user.tasksCompleted;
             let indexToDelete;
-
             Graduate.findById(req.user._id, function(err, result) {
                 if(!err) {
                     if(!result) {
-                        res.redirect('/profile');
+                        if (redirect === 'profile') {
+                            res.redirect('/profile');
+                        } else if (redirect === 'game') {
+                            res.redirect('/');
+                        }; 
                     } else {
                         tasksCompletedArray.forEach(task => {
                             if(id == task._id) {
@@ -328,7 +310,7 @@ module.exports = {
                                     if(saveErr) {
                                         return saveErr;
                                     } else {
-                                        res.redirect(`/profile/deleteGameTaskGrad/${id}/${task.task}`);
+                                        res.redirect(`/profile/deleteGameTaskGrad/${id}/${task.task}/${redirect}`);
                                     }
                                 })
                             };
@@ -347,13 +329,18 @@ module.exports = {
         if(req.isAuthenticated()) {
             let { id } = req.params;
             let { task } = req.params;
+            let { redirect } = req.params;
             let gradsCompletedArray;
             let indexToDelete;
             GameTask.findOne({task: task}, function(err, result) {
                 if(!err) {
                     if(!result) {
                         console.log('no match found')
-                        res.redirect('/profile');
+                        if (redirect === 'profile') {
+                            res.redirect('/profile');
+                        } else if (redirect === 'game') {
+                            res.redirect('/');
+                        };
                     } else {
                         gradsCompletedArray = result.graduatesCompleted;
                         gradsCompletedArray.forEach(entry => {
@@ -365,7 +352,11 @@ module.exports = {
                                     if(saveErr) {
                                         return saveErr;
                                     } else {
-                                        res.redirect('/profile');
+                                        if (redirect === 'profile') {
+                                            res.redirect('/profile');
+                                        } else if (redirect === 'game') {
+                                            res.redirect('/');
+                                        };   
                                     }
                                 })
                             };

@@ -1,9 +1,10 @@
 <div class="container-game-row">
-    <form action="/profile/checkUpdateTaskDate/<%= task._id %>/<%= task.maxRate %>/<%= task.task %>?_method=PUT " method="POST" enctype="application/x-www-form-urlencoded">
+    <% let redirect = 'profile' %> 
+    <form action="/profile/checkUpdateTaskDate/<%= task._id %>/<%= task.maxRate %>/<%= task.task %>/<%= redirect %>/?_method=PUT " method="POST" enctype="application/x-www-form-urlencoded">
         <div class="container-game-row-small">
             <div class="container-game-row-controls <%= color %>">
                 <span class="text-center">points: <%= task.points %></span> 
-                <a href="/profile/deleteTask/<%= task._id %>" class="button-submit <%= color %>">DELETE</a>
+                <a href="/profile/deleteTask/<%= task._id %>/<%= redirect %>" class="button-submit <%= color %>">DELETE</a>
             </div>
             <div class="container-game-row-task">
                 <%= task.task %>
