@@ -68,6 +68,7 @@ module.exports = {
     updateGameTask: (req, res) => {
         if(req.isAuthenticated()) {
             const { id } = req.params;
+            //creates a new ObjectId here so that the object entered in the gametask document under graduatesCompleted will have the same _id as the object in the user's tasksCompleted array - need to be the same to be able to update the dateCompleted in both spots
             let matchingId = new ObjectId();
             GameTask.findByIdAndUpdate(id, {$push: {
                 graduatesCompleted: {
@@ -86,9 +87,6 @@ module.exports = {
             })
         }
     },
-
-    //6101dc86d1b96fab693ce79f
-    //6101dc86d1b96fab693ce79f
 
     updateGraduateTask: (req, res) => {
         if(req.isAuthenticated()) {
@@ -156,6 +154,7 @@ module.exports = {
 
     updateTaskDate: (req, res) => {
         if(req.isAuthenticated()) {
+            //id being passed as parameter is the id of the object inside of the tasksCompleted array in the gradudate's database entry
             let { id } = req.params;
             let tasksCompletedArray = req.user.tasksCompleted;
             let indexToChange;
@@ -163,32 +162,36 @@ module.exports = {
             Graduate.findById(req.user._id, function(err, result) {
                 if(!err) {
                     if(!result){
-                        console.log('no result found')
-                        res.redirect('/profile')
+                        console.log('no result found');
+                        res.redirect('/profile');
                     } else {
                         tasksCompletedArray.forEach(task => {
                             if(id == task._id) {
+                                //gets the location of the task in the array of tasks completed to be able to change correct task's date
                                 indexToChange = tasksCompletedArray.indexOf(task);
 
 // Should eventually add in check to make sure task isn't being changed to a date that already has an entry if the maxValue: 'daily'
-
+                                //changes the date completed for the task in the database to what was entered by the user, must include the markModified on the array or changes will not save in database
                                 result.tasksCompleted[indexToChange].dateCompleted = req.body.dateCompleted;
                                 result.markModified('tasksCompleted');
                                 result.save(function(saveErr, saveResult) {
                                     if(saveErr) {
                                         return saveErr;
                                     } else {
-                                        res.redirect(`/profile/updateGameTaskGradDate/${id}/${req.body.dateCompleted}/${result.tasksCompleted[indexToChange].task}`)
-                                    }
-                                })  
+                                        //redirects to route that will update the GameTask entry array where grads who have completed the task + date they completed it are stored - passes in parameters for 1) the id of the tasksCompleted object (which matches the id in the gametasks's graduatesCompleted object), 2) the new date completed, and 3) the task string
+                                        res.redirect(`/profile/updateGameTaskGradDate/${id}/${req.body.dateCompleted}/${result.tasksCompleted[indexToChange].task}`);
+                                    };
+                                });  
                             };
-                        })  
+                        });  
                     };
                 } else {
                     return err;
-                }
-            })
-        }
+                };
+            });
+        } else {
+            res.render('pages/login', {message: `You must be logged in to edit this date.`, user: undefined})
+        };
     },
 
     updateGameTaskGradDate: (req, res) => {
@@ -196,205 +199,114 @@ module.exports = {
         let { date } = req.params;
         let { task } = req.params
         if(req.isAuthenticated()) {
-
             let gradsCompletedArray;
             let indexToChange;
-    
+            //used this method instead of findByIdAndUpdate because could not get $set to update subdocuments. 
             GameTask.findOne({task: task}, function(err, result) {
                 if(!err) {
                     if(!result){
-                        console.log('no result found')
-                        res.redirect('/profile')
+                        console.log('no result found');
+                        res.redirect('/profile');
                     } else {
                         gradsCompletedArray = result.graduatesCompleted;
                         gradsCompletedArray.forEach(entry => {
                             if(id == entry._id) {
+                                //gets the location of the grad entry in the array of graduatesCompleted to be able to change correct entry's date
                                 indexToChange = gradsCompletedArray.indexOf(entry);
+                                //changes the date completed for the entry in the database to what was entered by the user, must include the markModified on the array or changes will not save in database
                                 result.graduatesCompleted[indexToChange].dateCompleted = date;
                                 result.markModified('graduatesCompleted');
                                 result.save(function(saveErr, saveResult) {
                                     if(saveErr) {
                                         return saveErr;
                                     } else {
-                                        res.redirect('/profile')
-                                    }
-                                })  
+                                        res.redirect('/profile');
+                                    };
+                                });  
                             };
-                        })  
+                        });  
+                    };
+                } else {
+                    return err;
+                };
+            });
+        } else {
+            res.render('pages/login', {message: `You must be logged in to edit this date.`, user: undefined})
+        };
+    },
+
+    deleteGradTask: (req, res) => {
+        if(req.isAuthenticated()) {
+            let { id } = req.params;
+            let tasksCompletedArray = req.user.tasksCompleted;
+            let indexToDelete;
+
+            Graduate.findById(req.user._id, function(err, result) {
+                if(!err) {
+                    if(!result) {
+                        res.redirect('/profile');
+                    } else {
+                        tasksCompletedArray.forEach(task => {
+                            if(id == task._id) {
+                                result.totalPoints -= task.points;
+                                indexToDelete = tasksCompletedArray.indexOf(task);
+                                let removed = result.tasksCompleted.splice(indexToDelete, 1);
+                                result.markModified('tasksCompleted');
+                                result.markModified('totalPoints');
+                                result.save(function(saveErr, saveResult) {
+                                    if(saveErr) {
+                                        return saveErr;
+                                    } else {
+                                        res.redirect(`/profile/deleteGameTaskGrad/${id}/${task.task}`);
+                                    }
+                                })
+                            };
+                        });
+                    };
+                } else {
+                    return err;
+                };
+            });
+        } else {
+            res.render('pages/login', {message: `You must be logged in to delete a task.`, user: undefined});
+        };
+    },
+
+    deleteTaskGrad: (req, res) => {
+        if(req.isAuthenticated()) {
+            let { id } = req.params;
+            let { task } = req.params;
+            let gradsCompletedArray;
+            let indexToDelete;
+            GameTask.findOne({task: task}, function(err, result) {
+                if(!err) {
+                    if(!result) {
+                        console.log('no match found')
+                        res.redirect('/profile');
+                    } else {
+                        gradsCompletedArray = result.graduatesCompleted;
+                        gradsCompletedArray.forEach(entry => {
+                            if(id == entry._id) {
+                                indexToDelete = gradsCompletedArray.indexOf(entry);
+                                let removed = result.graduatesCompleted.splice(indexToDelete, 1);
+                                result.markModified('graduatesCompleted');
+                                result.save(function(saveErr, saveResult) {
+                                    if(saveErr) {
+                                        return saveErr;
+                                    } else {
+                                        res.redirect('/profile');
+                                    }
+                                })
+                            };
+                        });
                     };
                 } else {
                     return err;
                 }
-            })
-
+            });
         } else {
-            res.render('pages/login', {message: `You must be logged in to edit this date.`, user: undefined})
+            res.render('pages/login', {message: `You must be logged in to delete a task.`, user: undefined});
         }
-
     }
 
-
-
-
-
-
-    // updateTaskDate: (req, res) => {
-    //     if(req.isAuthenticated()) {
-    //         let { id } = req.params;
-    //         console.log(id)
-    //         Graduate.find({
-    //             _id: req.user._id,
-    //         }, function(err, found) {
-    //             if(err) {
-    //                 return err
-    //             } else {
-    //                 console.log(typeof found);
-    //                 console.log(found._id);
-    //                 res.redirect(`/profile`);
-    //             }
-    //         })
-    //     } else {
-    //         res.render('pages/login', {message: `You must be logged in to update your completed task`, user: undefined})
-    //     }
-    // },
-
-    // updateTaskDate: (req, res) => {
-    //     if(req.isAuthenticated()) {
-    //         let { id } = req.params.id;
-    //         Graduate.findOneAndUpdate({
-    //             _id: req.user._id,
-    //             "tasksCompleted._id": id
-    //         }, {
-    //             "tasksCompleted.$.dateCompleted": req.body.dateCompleted
-    //         }, (err) => {
-    //             if(err) {
-    //                 return err;
-    //             } else {
-    //                 res.redirect(`/profile`);
-    //             };
-    //         })
-    //     } else {
-    //         res.render('pages/login', {message: `You must be logged in to update your completed task`, user: undefined})
-    //     }
-    // },
-
-    // updateTaskDate: (req, res) => {
-    //     if(req.isAuthenticated()) {
-    //         let { id } = req.params.id;
-    //         Graduate.findOneAndUpdate({
-    //             _id: req.user._id,
-    //             "tasksCompleted._id": id
-    //         }, {
-    //             $set: {
-    //                 "tasksCompleted.$.dateCompleted": req.body.dateCompleted
-    //             }
-    //         }, (err) => {
-    //             if(err) {
-    //                 return error
-    //             } else {
-    //                 res.redirect(`/profile`);
-    //             }
-
-    //         })
-    //     } else {
-    //         res.render('pages/login', {message: `You must be logged in to update your completed task`, user: undefined})
-    //     }
-    // },
-
-    // updateTaskDate: (req, res) => {
-    //     if(req.isAuthenticated()) {
-    //         const { id } = req.params;
-    //         const userId = req.user._id;
-    //         console.log(`the task's id is ${id}`);
-    //         let updatedDate = req.body.dateCompleted;
-    //         console.log(`the updated date is ${updatedDate}`);
-    //         console.log(`do task's id and the object id in database match? ${id == req.user.tasksCompleted[0]._id}`)
-    //         let tasksCompletedArray = req.user.tasksCompleted;
-    //         Graduate.findOneAndUpdate(
-    //             { _id: userId }, 
-    //             { $set: { "tasksCompleted.$[el].dateCompleted": updatedDate }},
-    //             { 
-    //                 arrayFilters: [{ "el._id": id}],
-    //                 new: true
-    //             }, (err) => {
-    //                 if(err) {
-    //                     return err;
-    //                 } else {
-                    
-    //                     res.redirect(`/profile`);
-
-    //                 }
-    //             }
-    //             )
-
-
-    //         // tasksCompletedArray.forEach(task => {
-    //         //     if(task._id == id) {
-    //         //         console.log(`Winner winner`)
-    //         //         let indexToChange = tasksCompletedArray.indexOf(task);
-    //         //         console.log(`the index of the task to change is: ${indexToChange}`)
-    //                 // let VARIABLE = tasksCompleted[indexToChange].dateCompleted;
-    //                 // Graduate.findOneAndUpdate(
-    //                 //     { _id: userId }, 
-    //                 //     { $set: { "tasksCompleted.$[el].dateCompleted": updatedDate }},
-    //                 //     { 
-    //                 //         arrayFilters: [{ "el._id": id}],
-    //                 //         new: true
-    //                 //     }, (err) => {
-    //                 //         if(err) {
-    //                 //             return err;
-    //                 //         } else {
-                            
-    //                 //             res.redirect(`/profile`);
-    
-    //                 //         }
-    //                 //     }
-    //                 //     )
-    //             // } else {
-    //             //     console.log(`loops gonna loop`)
-    //             // }
-    //         // })
-    //         // Graduate.findOneAndUpdate({
-    //         //     "_id": userId,
-    //         //     "tasksCompleted._id": id,
-    //         // }, {
-    //         //     "$set": {
-    //         //         "tasksCompleted.$.dateCompleted": updatedDate
-    //         //     }
-    //         // }, function(err, success) {
-    //         //     if(err) {
-    //         //         return err;
-    //         //     } else {
-    //         //         console.log('about to redirect')
-    //         //         res.redirect(`/profile`);
-    //         //     }
-    //         // })
-    //         // console.log(tasksCompletedArray[0]._id);
-    //         // console.log(ObjectId(tasksCompletedArray[0]._id) == ObjectId(taskId));
-
-    //         // tasksCompletedArray.forEach(task => {
-    //         //     console.log(`task._id: ${task._id}`)
-    //         //     if (taskId == task._id) {
-    //         //         console.log(`Yay, a match`);
-    //         //         let removeIndex = tasksCompletedArray.indexOf(task);
-    //         //         indexToChange = removeIndex;
-    //         //         console.log(`looped through to find this idex to change: ${removeIndex}`);
-    //         //         res.redirect(`/profile/updatedTaskDate/${indexToChange}`)
-
-    //                 // Graduate.findByIdAndUpdate(req.user._id, {$set: {
-    //                 //     tasksCompletedArray[indexToChange].dateCompleted: updatedDate,
-    //                 // }}, { new: true}, err => {
-    //                 //     if(err) {
-    //                 //         return err;
-    //                 //     } else {
-    //                 //         console.log(`found graduate and tried to update`)
-    //                 //         res.redirect(`/profile`)
-    //                 //     }
-    //                 // })
-    //             // };
-            
-    //     } else {
-    //         res.render('pages/login', {message: `You must be logged in to update your completed task`, user: undefined})
-    //     }
-    // },
 };

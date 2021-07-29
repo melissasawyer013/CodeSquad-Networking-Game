@@ -35,5 +35,11 @@ router.route('/updateTaskDate/:id')
 router.route('/updateGameTaskGradDate/:id/:date/:task')
     .get(profileController.updateGameTaskGradDate)
 
+router.route('/deleteTask/:id')
+    .get(profileController.deleteGradTask)
+
+router.route('/deleteGameTaskGrad/:id/:task')
+    .get(profileController.deleteTaskGrad)
+
 
 module.exports = router;
