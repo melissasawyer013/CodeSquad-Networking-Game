@@ -572,6 +572,18 @@ tr {
     text-shadow: 3px 2px var(--dark-grey);
 }
 
+.button-submit:link,
+.button-submit:visited {
+    text-decoration: none;
+    text-align: center;
+}
+
+.button-submit:hover, 
+.button-submit:active {
+    text-decoration: none;
+    text-align: center;
+}
+
 .container-game-row {
     display: flex;
     flex-direction: row;

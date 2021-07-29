@@ -6,9 +6,81 @@
     <% if(message != undefined ) { %>
         <%= message %> 
     <% } %> 
-    <% if(user.adminStatus === 'Admin') { %>
-        <a href="/admin" class="container-content-link">Admin Dashboard</a>
+    <% if(user != undefined) { %>
+        <div class="container-buttons-row">
+            <a href="/profile/editProfile/<%= user._id %>" class="link-button">Edit Profile Information</a>
+            
+            <% if(user.adminStatus === 'Admin') { %>
+                <a href="/admin" class="link-button">Admin Dashboard</a>
+            <% } %> 
+        </div> 
+        <span>Name: <%= user.name %> </span>
+        <span>Email: <%= user.email %> </span>
+        <span>Cohort Year: <%= user.cohortYear %> </span>
+        <span>GitHub: <%= user.githubUrl %> </span>
+        <span>LinkedIn: <%= user.linkedinUrl %> </span>
+        <span>Total Points Earned: <%= user.totalPoints %> </span>
+        <br><br><br>
+        <h2>Your Completed Tasks</h2>
+        <div class="container-game-heading red-accents">
+            <h2>COMPLETED BASICS</h2>
+        </div>
+        <% completedTasks.forEach( task => { %>
+            <% if(task.category === 'basics') { %>
+                <%- include ('../partials/profile-completed-row', {task: task, user: user, style: 'done all', color: 'red-accents'}) %>
+            <% } %> 
+        <% }) %>
+
+        <div class="container-game-heading orange-accents">
+            <h2>COMPLETED PROFILE</h2>
+        </div>
+        <% completedTasks.forEach( task => { %>
+            <% if(task.category === 'profile') { %>
+                <%- include ('../partials/profile-completed-row', {task: task, user: user, style: 'done all', color: 'orange-accents'}) %>
+            <% } %> 
+        <% }) %>
+
+        <div class="container-game-heading yellow-accents">
+            <h2>COMPLETED LEARNING</h2>
+        </div>
+        <% completedTasks.forEach( task => { %>
+            <% if(task.category === 'learning') { %>
+                <%- include ('../partials/profile-completed-row', {task: task, user: user, style: 'done all', color: 'yellow-accents'}) %>
+            <% } %> 
+        <% }) %>
+
+        <div class="container-game-heading green-accents">
+            <h2>COMPLETED PORTFOLIO</h2>
+        </div>
+        <% completedTasks.forEach( task => { %>
+            <% if(task.category === 'portfolio') { %>
+                <%- include ('../partials/profile-completed-row', {task: task, user: user, style: 'done all', color: 'green-accents'}) %>
+            <% } %> 
+        <% }) %>
+
+        <div class="container-game-heading blue-accents">
+            <h2>COMPLETED NETWORK</h2>
+        </div>
+        <% completedTasks.forEach( task => { %>
+            <% if(task.category === 'network') { %>
+                <%- include ('../partials/profile-completed-row', {task: task, user: user, style: 'done all', color: 'blue-accents'}) %>
+            <% } %> 
+        <% }) %>
+
+        <div class="container-game-heading purple-accents">
+            <h2>COMPLETED JOBS</h2>
+        </div>
+        <% completedTasks.forEach( task => { %>
+            <% if(task.category === 'jobs') { %>
+                <%- include ('../partials/profile-completed-row', {task: task, user: user, style: 'done all', color: 'purple-accents'}) %>
+            <% } %> 
+        <% }) %>
     <% } %> 
+
+
+    
+
+    
     
 </div>
 

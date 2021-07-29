@@ -3,8 +3,6 @@ const GameTask = require('../models/gameTaskSchema');
 module.exports = {
     index: (req, res) => {
         if(req.isAuthenticated()) {
-            let user = req.user;
-
             // creats a variable called today that gets the value for today's date from the date Object and formats it as a string: "YYYY-MM-DD"
             let date = new Date;
             let today = date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString().padStart(2, 0) + '-' + date.getDate().toString().padStart(2, 0);
@@ -18,7 +16,7 @@ module.exports = {
                     return err;
                 } else {
                     //creates an array called tasksCompletedAllTime to be passed into the ejs file and displayed at the bottom of the page
-                    let tasksCompletedAllTime = user.tasksCompleted;
+                    let tasksCompletedAllTime = req.user.tasksCompleted;
                     
                     // creates an array of all the tasks in gametask database entries to be pruned further down, with the final list passed into the ejs file to be shown as regular game task options users can complete at the time the page is rendered
                     let tasksCanAddToday = gameList;

@@ -1,0 +1,18 @@
+<div class="container-game-row">
+    <form action="/profile/updateTaskDate/<%= task._id %>?_method=PUT " method="POST" enctype="application/x-www-form-urlencoded">
+        <div class="container-game-row-small">
+            <div class="container-game-row-controls <%= color %>">
+                <span class="text-center">points: <%= task.points %></span> 
+                <a href="/profile/deleteTask/<%= task._id %>" class="button-submit <%= color %>">DELETE</a>
+            </div>
+            <div class="container-game-row-task">
+                <%= task.task %>
+            </div>
+        </div>
+        <div class="container-game-date <%= color %>">
+            <label for="dateCompleted">Date Completed: </label>
+            <input type="date" name="dateCompleted" id="dateCompleted" value="<%= task.dateCompleted %>">
+            <input type="submit" value="UPDATE" class="button-submit <%= color %>">
+        </div>
+    </form>
+</div>

@@ -22,8 +22,18 @@ router.route('/logout')
 router.route('/updateGameTask/:id')
     .post(profileController.updateGameTask)
 
-router.route('/updateGraduateTask/:id/:date')
+router.route('/updateGraduateTask/:id/:date/:match')
     .get(profileController.updateGraduateTask)
+
+router.route('/editProfile/:id')
+    .get(profileController.editProfile)
+    .put(profileController.updateProfile)
+
+router.route('/updateTaskDate/:id') 
+    .put(profileController.updateTaskDate)
+
+router.route('/updateGameTaskGradDate/:id/:date/:task')
+    .get(profileController.updateGameTaskGradDate)
 
 
 module.exports = router;
