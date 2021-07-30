@@ -3,7 +3,17 @@
 
 <div class="container-content">
     <h1>Scoreboard Page</h1>
+    <h2>All-Time Points Scoreboard</h2>
+    <p>First Place: <%= sortedGradsAllTime[0].name %> with <%= sortedGradsAllTime[0].totalPoints %> total points.</p>
+    <p>Second Place: <%= sortedGradsAllTime[1].name %> with <%= sortedGradsAllTime[1].totalPoints %> total points.</p>
+    <p>Third Place: <%= sortedGradsAllTime[2].name %> with <%= sortedGradsAllTime[2].totalPoints %> total points.</p>
+
+    <h2>Monthly Points Scoreboard</h2>
+    <p>First Place: <%= sortedGradsMonth[0].name %> with <%= sortedGradsMonth[0].monthlyPoints %> total points.</p>
+    <p>Second Place: <%= sortedGradsMonth[1].name %> with <%= sortedGradsMonth[1].monthlyPoints %> total points.</p>
+    <p>Third Place: <%= sortedGradsMonth[2].name %> with <%= sortedGradsMonth[2].monthlyPoints %> total points.</p>
 </div>
+
 
 
 

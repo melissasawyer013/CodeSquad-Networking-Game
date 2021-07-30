@@ -1,5 +1,5 @@
 const Graduate = require('../models/graduateSchema');
-const GameTask = require('../models/gameTaskSchema')
+const GameTask = require('../models/gameTaskSchema');
 
 module.exports = {
     admin: (req, res) => {
