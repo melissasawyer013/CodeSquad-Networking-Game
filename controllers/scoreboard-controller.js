@@ -12,7 +12,7 @@ module.exports = {
                     let date = new Date;
                     let today = date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString().padStart(2, 0) + '-' + date.getDate().toString().padStart(2, 0);
                     let currentMonth = today.substr(5, 2);
-                    console.log(`current month: ${currentMonth}`);
+                    // console.log(`current month: ${currentMonth}`);
                     sortedGradsAllTime.forEach(grad => {
                         // let monthlyPoints = grad.totalPoints;
                         let tasksCompletedArray = grad.tasksCompleted;

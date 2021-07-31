@@ -68,6 +68,7 @@ module.exports = {
     updateGameTask: (req, res) => {
         if(req.isAuthenticated()) {
             const { id } = req.params;
+            const { date } = req.params
             //creates a new ObjectId here so that the object entered in the gametask document under graduatesCompleted will have the same _id as the object in the user's tasksCompleted array - need to be the same to be able to update the dateCompleted in both spots
             let matchingId = new ObjectId();
             GameTask.findByIdAndUpdate(id, {$push: {
@@ -76,13 +77,13 @@ module.exports = {
                     'name': req.user.name,
                     'dateAdded': new Date(),
                     'dateEdited': new Date(),
-                    'dateCompleted': req.body.dateCompleted,
+                    'dateCompleted': date,
                 }
             }}, {new: true}, err => {
                 if (err) {
                     return err;
                 } else {
-                    res.redirect(`/profile/updateGraduateTask/${id}/${req.body.dateCompleted}/${matchingId}`);
+                    res.redirect(`/profile/updateGraduateTask/${id}/${date}/${matchingId}`);
                 }
             })
         }
@@ -170,7 +171,7 @@ module.exports = {
                             //Without the return err, got error: Cannot set headers after they are sent to the client.
                             return err;
                             break;
-                        } else if (redirect === 'game') {
+                        } else if (redirect === 'game' || redirect === 'game new') {
                             res.redirect('/');
                             //Without the return err, got error: Cannot set headers after they are sent to the client.
                             return err;
@@ -179,9 +180,18 @@ module.exports = {
                     };
                 };
                 // if there are no date conflicts, routed to next step
-                res.redirect(`/profile/updateTaskDate/${id}/${req.body.dateCompleted}/${redirect}`);
+                if (redirect === 'profile' || redirect === 'game') {
+                    res.redirect(`/profile/updateTaskDate/${id}/${req.body.dateCompleted}/${redirect}`);
+                } else if (redirect === 'game new') {
+                    res.redirect(`/profile/updateGameTask/${id}/${req.body.dateCompleted}`)
+                }
+                
             } else {
-                res.redirect(`/profile/updateTaskDate/${id}/${req.body.dateCompleted}/${redirect}`);
+                if (redirect === 'profile' || redirect === 'game') {
+                    res.redirect(`/profile/updateTaskDate/${id}/${req.body.dateCompleted}/${redirect}`);
+                } else if (redirect === 'game new') {
+                    res.redirect(`/profile/updateGameTask/${id}/${req.body.dateCompleted}`)
+                }
             }
         } else {
             res.render('pages/login', {message: `You must be logged in to edit this date.`, user: undefined});
@@ -335,7 +345,7 @@ module.exports = {
             GameTask.findOne({task: task}, function(err, result) {
                 if(!err) {
                     if(!result) {
-                        console.log('no match found')
+                        // console.log('no match found in second step')
                         if (redirect === 'profile') {
                             res.redirect('/profile');
                         } else if (redirect === 'game') {
@@ -343,15 +353,18 @@ module.exports = {
                         };
                     } else {
                         gradsCompletedArray = result.graduatesCompleted;
+                        // console.log(`gradsCompletedArray: ${gradsCompletedArray}`);
                         gradsCompletedArray.forEach(entry => {
                             if(id == entry._id) {
                                 indexToDelete = gradsCompletedArray.indexOf(entry);
                                 let removed = result.graduatesCompleted.splice(indexToDelete, 1);
+                                // console.log(`removed: ${removed}`);
                                 result.markModified('graduatesCompleted');
                                 result.save(function(saveErr, saveResult) {
                                     if(saveErr) {
                                         return saveErr;
                                     } else {
+                                        // console.log(`saveResult: ${saveResult}`);
                                         if (redirect === 'profile') {
                                             res.redirect('/profile');
                                         } else if (redirect === 'game') {

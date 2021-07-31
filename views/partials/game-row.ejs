@@ -4,7 +4,8 @@
 <% let redirect = 'game' %> 
 <% if(style === 'regular') { %>
     <div class="container-game-row">
-        <form action="/profile/updateGameTask/<%= task._id %>" method="POST">
+        <% redirect = 'game new' %> 
+        <form action="/profile/checkUpdateTaskDate/<%= task._id %>/<%= task.maxRate %>/<%= task.task %>/<%= redirect %>?_method=PUT " method="POST" enctype="application/x-www-form-urlencoded">
             <div class="container-game-row-small">
                 <div class="container-game-row-controls <%= color %>">
                     <span class="text-center">points: <%= task.points %></span> 

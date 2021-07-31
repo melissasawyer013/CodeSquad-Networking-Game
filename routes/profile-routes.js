@@ -19,8 +19,8 @@ router.route('/auth/github/callback')
 router.route('/logout')
     .get(profileController.logout)
 
-router.route('/updateGameTask/:id')
-    .post(profileController.updateGameTask)
+router.route('/updateGameTask/:id/:date')
+    .get(profileController.updateGameTask)
 
 router.route('/updateGraduateTask/:id/:date/:match')
     .get(profileController.updateGraduateTask)
@@ -32,9 +32,7 @@ router.route('/editProfile/:id')
 router.route('/checkUpdateTaskDate/:id/:maxRate/:task/:redirect')
     .put(profileController.checkUpdateTaskDate)
 
-// router.route('/updateTaskDate/:id') 
 router.route('/updateTaskDate/:id/:newDate/:redirect') 
-    // .put(profileController.updateTaskDate)
     .get(profileController.updateTaskDate)
 
 router.route('/updateGameTaskGradDate/:id/:date/:task/:redirect')
