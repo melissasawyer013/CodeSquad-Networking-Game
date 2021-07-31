@@ -1,0 +1,66 @@
+<% let date = new Date; %>
+<% let dateValue = date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString().padStart(2, 0) + '-' + date.getDate().toString().padStart(2, 0); %> 
+<% let userTasksArray = user.tasksCompleted; %> 
+<% let redirect = 'admin' %> 
+<% if(style === 'regular') { %>
+    <div class="container-game-row">
+        <% redirect = 'admin new' %> 
+        <form action="/admin/checkUpdateTaskDate/<%= task._id %>/<%= task.maxRate %>/<%= task.task %>/<%= foundGraduate._id %>/<%= redirect %>?_method=PUT " method="POST" enctype="application/x-www-form-urlencoded">
+            <div class="container-game-row-small">
+                <div class="container-game-row-controls <%= color %>">
+                    <span class="text-center">points: <%= task.points %></span> 
+                    <input type="submit" value="ADD" class="button-submit <%= color %>">
+                </div>
+                <div class="container-game-row-task">
+                    <%= task.task %>
+                </div>
+            </div>
+            <div class="container-game-date <%= color %>">
+                <label for="dateCompleted">Date Completed: </label>
+                <input type="date" name="dateCompleted" id="dateCompleted" value="<%= dateValue %>">
+            </div>
+        </form>
+    </div>
+
+
+<% } else if (style === 'done today') {%>
+    <div class="container-game-row">
+        <form action="/admin/checkUpdateTaskDate/<%= task._id %>/<%= task.maxRate %>/<%= task.task %>/<%= foundGraduate._id %>/<%= redirect %>?_method=PUT " method="POST" enctype="application/x-www-form-urlencoded">
+            <div class="container-game-row-small">
+                <div class="container-game-row-controls <%= color %>">
+                    <span class="text-center">points: <%= task.points %></span> 
+                    <a href="/admin/deleteTask/<%= task._id %>/<%= foundGraduate._id %>" class="button-submit <%= color %>">DELETE</a>
+                </div>
+                <div class="container-game-row-task text-strikethrough">
+                    <%= task.task %>
+                </div>
+            </div>
+            <div class="container-game-date <%= color %>">
+                <label for="dateCompleted">Date Completed: </label>
+                <input type="date" name="dateCompleted" id="dateCompleted" value="<%= task.dateCompleted %>">
+                <input type="submit" value="UPDATE" class="button-submit <%= color %>">
+            </div>
+        </form>
+    </div>
+
+
+<% } else if(style === 'done all') { %>
+    <div class="container-game-row">
+        <form action="/admin/checkUpdateTaskDate/<%= task._id %>/<%= task.maxRate %>/<%= task.task %>/<%= foundGraduate._id %>/<%= redirect %>?_method=PUT " method="POST" enctype="application/x-www-form-urlencoded">
+            <div class="container-game-row-small">
+                <div class="container-game-row-controls <%= color %>">
+                    <span class="text-center">points: <%= task.points %></span> 
+                    <a href="/admin/deleteTask/<%= task._id %>/<%= foundGraduate._id %>" class="button-submit <%= color %>">DELETE</a>
+                </div>
+                <div class="container-game-row-task">
+                    <%= task.task %>
+                </div>
+            </div>
+            <div class="container-game-date <%= color %>">
+                <label for="dateCompleted">Date Completed: </label>
+                <input type="date" name="dateCompleted" id="dateCompleted" value="<%= task.dateCompleted %>">
+                <input type="submit" value="UPDATE" class="button-submit <%= color %>">
+            </div>
+        </form>   
+    </div>
+<% } %> 

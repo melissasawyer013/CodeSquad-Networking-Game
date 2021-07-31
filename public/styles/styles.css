@@ -258,6 +258,39 @@ footer li a:active {
     }
 }
 
+iframe {
+    width: 100%;
+    align-self: center;
+    height: 100vh;
+}
+
+.container-scoreboard-row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 2px var(--dark-grey) solid;
+    margin: 10px 0;
+}
+
+.container-scoreboard-place {
+    color: var(--red);
+    /* background-color: var(--red); */
+    width: 100%;
+    text-align: center;
+    border-bottom: 2px var(--dark-grey) solid;
+}
+
+.container-scoreboard-grad-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.container-scoreboard-grad-row img {
+    width: 200px;
+    height: auto;
+}
 
 .text-center {
     text-align: center;

@@ -2,16 +2,37 @@
 <%- include('../partials/navbar') -%>
 
 <div class="container-content">
-    <h1>Scoreboard Page</h1>
-    <h2>All-Time Points Scoreboard</h2>
-    <p>First Place: <%= sortedGradsAllTime[0].name %> with <%= sortedGradsAllTime[0].totalPoints %> total points.</p>
-    <p>Second Place: <%= sortedGradsAllTime[1].name %> with <%= sortedGradsAllTime[1].totalPoints %> total points.</p>
-    <p>Third Place: <%= sortedGradsAllTime[2].name %> with <%= sortedGradsAllTime[2].totalPoints %> total points.</p>
-
+    <h1>Scoreboards</h1>
     <h2>Monthly Points Scoreboard</h2>
-    <p>First Place: <%= sortedGradsMonth[0].name %> with <%= sortedGradsMonth[0].monthlyPoints %> total points.</p>
-    <p>Second Place: <%= sortedGradsMonth[1].name %> with <%= sortedGradsMonth[1].monthlyPoints %> total points.</p>
-    <p>Third Place: <%= sortedGradsMonth[2].name %> with <%= sortedGradsMonth[2].monthlyPoints %> total points.</p>
+    <% let place; %> 
+    <% for (let i = 0; i < 3; i++) { %>
+        <% if(i===0) { %>
+            <% place = 'First Place'; %> 
+        <% }; %> 
+        <% if(i===1) { %>
+            <% place = 'Second Place'; %> 
+        <% }; %> 
+        <% if(i===2) { %>
+            <% place = 'Third Place'; %> 
+        <% }; %> 
+        <%- include ('../partials/scoreboard-row', {grad: sortedGradsMonth[i], place: place, board: 'monthly'}) %> 
+    <% } %> 
+
+    <h2>All-Time Points Scoreboard</h2>
+    <% for (let i = 0; i < 3; i++) { %>
+        <% if(i===0) { %>
+            <% place = 'First Place'; %> 
+        <% }; %> 
+        <% if(i===1) { %>
+            <% place = 'Second Place'; %> 
+        <% }; %> 
+        <% if(i===2) { %>
+            <% place = 'Third Place'; %> 
+        <% }; %> 
+        <%- include ('../partials/scoreboard-row', {grad: sortedGradsAllTime[i], place: place, board: 'all-time'}) %> 
+    <% } %> 
+
+
 </div>
 
 

@@ -17,6 +17,21 @@ router.route('/graduateEdit/:id')
     .get(adminController.editGraduate)
     .put(adminController.updateGraduate)
 
+router.route('/checkUpdateTaskDate/:id/:maxRate/:task/:gradId/:redirect')
+    .put(adminController.checkUpdateTaskDate)
+
+router.route('/updateGameTask/:id/:date/:gradId/:gradName/:gradPoints')
+    .get(adminController.updateGameTaskGrad)
+
+router.route('/updateGraduateTask/:id/:date/:match/:gradId/:gradPoints')
+    .get(adminController.updateGraduateTask)
+
+router.route('/updateTaskDate/:id/:newDate/:gradId/:redirect') 
+    .get(adminController.updateTaskDate)
+
+router.route('/updateGameTaskGradDate/:id/:date/:task/:gradId/:redirect')
+    .get(adminController.updateGameTaskGradDate)
+
 router.route('/gameTasksList')
     .get(adminController.gameTasksList)
 
@@ -27,6 +42,12 @@ router.route('/createGameTask')
 router.route('/gameTaskEdit/:id')
     .get(adminController.editGameTask)
     .put(adminController.updateGameTask)
+
+router.route('/deleteTask/:id/:gradId')
+    .get(adminController.deleteGradTask)
+
+router.route('/deleteGameTaskGrad/:id/:task/:gradId')
+    .get(adminController.deleteTaskGrad)
 
 
 

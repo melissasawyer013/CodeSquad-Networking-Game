@@ -1,0 +1,19 @@
+
+
+<div class="container-scoreboard-row">
+    <div class="container-scoreboard-place">
+        <span><%= place %> </span>
+    </div>
+    <div class="container-scoreboard-grad-row">
+        <img src="<%= grad.photoUrl %>" alt="headshot of graduate">
+        <span><%= grad.name %> </span>
+        <span>Cohort: <%= grad.cohortYear %></span>
+        <% if (board === 'monthly') { %>
+            <span><%= grad.monthlyPoints %> points</span>
+        <% } else if (board === 'all-time') { %>
+            <span><%= grad.totalPoints %> points</span>
+        <% } %> 
+        
+        
+    </div>
+</div>

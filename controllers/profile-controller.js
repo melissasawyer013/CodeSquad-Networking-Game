@@ -68,7 +68,7 @@ module.exports = {
     updateGameTask: (req, res) => {
         if(req.isAuthenticated()) {
             const { id } = req.params;
-            const { date } = req.params
+            const { date } = req.params;
             //creates a new ObjectId here so that the object entered in the gametask document under graduatesCompleted will have the same _id as the object in the user's tasksCompleted array - need to be the same to be able to update the dateCompleted in both spots
             let matchingId = new ObjectId();
             GameTask.findByIdAndUpdate(id, {$push: {
@@ -297,6 +297,7 @@ module.exports = {
     deleteGradTask: (req, res) => {
         if(req.isAuthenticated()) {
             let { id } = req.params;
+            // console.log(`id param is: ${id}`)
             let { redirect } = req.params;
             let tasksCompletedArray = req.user.tasksCompleted;
             let indexToDelete;
@@ -355,7 +356,10 @@ module.exports = {
                         gradsCompletedArray = result.graduatesCompleted;
                         // console.log(`gradsCompletedArray: ${gradsCompletedArray}`);
                         gradsCompletedArray.forEach(entry => {
+                            // console.log(`the id is ${id}`);
+                            // console.log(`the entry id is ${entry._id}`)
                             if(id == entry._id) {
+                                
                                 indexToDelete = gradsCompletedArray.indexOf(entry);
                                 let removed = result.graduatesCompleted.splice(indexToDelete, 1);
                                 // console.log(`removed: ${removed}`);
