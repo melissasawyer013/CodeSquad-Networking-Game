@@ -59,7 +59,7 @@ passport.deserializeUser(function(id, done) {
 passport.use(new GitHubStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:5500/profile/auth/github/callback"
+    callbackURL: "https://codesquad-the-game.herokuapp.com/profile/auth/github/callback"
 },
     function(accessToken, refreshToken, profile, done) {
         //conditional checks if the GitHub URL returned matches what was saved in the githubUrlToMatch variable from the database
