@@ -29,6 +29,6 @@ app.use('/', routes);
 require('./config/connection');
 
 app.listen(PORT, () => {
-    console.log(`Server has started and can be seen at: http://localhost:${PORT}`)
+    console.log(`Server has started.`)
 });
 

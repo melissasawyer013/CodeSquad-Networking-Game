@@ -65,6 +65,7 @@ module.exports = {
         } 
     },
 
+    // callback to update the GameTask document in the database for newly completed tasks: adds an object to the graduatesCompleted array
     updateGameTask: (req, res) => {
         if(req.isAuthenticated()) {
             const { id } = req.params;
@@ -83,12 +84,14 @@ module.exports = {
                 if (err) {
                     return err;
                 } else {
+                    //when successful in updating the GameTask document, goes to route to update the Graduate document 
                     res.redirect(`/profile/updateGraduateTask/${id}/${date}/${matchingId}`);
                 }
             })
         }
     },
 
+    // callback to update the Graduate document in the database for newly completed tasks: adds an object to the tasksCompleted array and updates the score
     updateGraduateTask: (req, res) => {
         if(req.isAuthenticated()) {
             const { id } = req.params;
@@ -210,7 +213,6 @@ module.exports = {
             Graduate.findById(req.user._id, function(err, result) {
                 if(!err) {
                     if(!result){
-                        console.log('no result found');
                         if (redirect === 'profile') {
                             res.redirect('/profile');
                         } else if (redirect === 'game') {
@@ -256,7 +258,6 @@ module.exports = {
             GameTask.findOne({task: task}, function(err, result) {
                 if(!err) {
                     if(!result){
-                        console.log('no result found');
                         if (redirect === 'profile') {
                             res.redirect('/profile');
                         } else if (redirect === 'game') {
@@ -297,7 +298,6 @@ module.exports = {
     deleteGradTask: (req, res) => {
         if(req.isAuthenticated()) {
             let { id } = req.params;
-            // console.log(`id param is: ${id}`)
             let { redirect } = req.params;
             let tasksCompletedArray = req.user.tasksCompleted;
             let indexToDelete;
@@ -346,7 +346,6 @@ module.exports = {
             GameTask.findOne({task: task}, function(err, result) {
                 if(!err) {
                     if(!result) {
-                        // console.log('no match found in second step')
                         if (redirect === 'profile') {
                             res.redirect('/profile');
                         } else if (redirect === 'game') {
@@ -354,21 +353,15 @@ module.exports = {
                         };
                     } else {
                         gradsCompletedArray = result.graduatesCompleted;
-                        // console.log(`gradsCompletedArray: ${gradsCompletedArray}`);
                         gradsCompletedArray.forEach(entry => {
-                            // console.log(`the id is ${id}`);
-                            // console.log(`the entry id is ${entry._id}`)
                             if(id == entry._id) {
-                                
                                 indexToDelete = gradsCompletedArray.indexOf(entry);
                                 let removed = result.graduatesCompleted.splice(indexToDelete, 1);
-                                // console.log(`removed: ${removed}`);
                                 result.markModified('graduatesCompleted');
                                 result.save(function(saveErr, saveResult) {
                                     if(saveErr) {
                                         return saveErr;
                                     } else {
-                                        // console.log(`saveResult: ${saveResult}`);
                                         if (redirect === 'profile') {
                                             res.redirect('/profile');
                                         } else if (redirect === 'game') {

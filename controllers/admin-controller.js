@@ -42,7 +42,6 @@ module.exports = {
                     adminStatus: req.body.adminStatus,
                 });
                 newGraduate.save();
-                console.log(`newGraduate: ${newGraduate}`);
                 res.redirect('/admin/graduatesList');    
             } else {
                 res.render('pages/profile', { user: req.user, message: `You are not authorized to create graduates.`})
@@ -415,7 +414,6 @@ module.exports = {
                     maxRate: req.body.maxRate,
                 });
                 newGameTask.save();
-                console.log(`newGameTask: ${newGameTask}`);
                 res.redirect('/admin/gameTasksList');  
             } else {
                 res.render('pages/profile', { user: req.user, message: `You are not authorized to create game tasks.`})
@@ -521,24 +519,18 @@ module.exports = {
                 GameTask.findOne({task: task}, function(err, result) {
                     if(!err) {
                         if(!result) {
-                            // console.log('no match found in second step')
                             res.redirect(`/admin/graduateEdit/${gradId}`);
                         } else {
                             gradsCompletedArray = result.graduatesCompleted;
-                            // console.log(`gradsCompletedArray: ${gradsCompletedArray}`);
                             gradsCompletedArray.forEach(entry => {
-                                // console.log(`the id is ${id}`);
-                                // console.log(`the entry id is ${entry._id}`)
                                 if(id == entry._id) {
                                     indexToDelete = gradsCompletedArray.indexOf(entry);
                                     let removed = result.graduatesCompleted.splice(indexToDelete, 1);
-                                    // console.log(`removed: ${removed}`);
                                     result.markModified('graduatesCompleted');
                                     result.save(function(saveErr, saveResult) {
                                         if(saveErr) {
                                             return saveErr;
                                         } else {
-                                            // console.log(`saveResult: ${saveResult}`);
                                             res.redirect(`/admin/graduateEdit/${gradId}`);
                                         }
                                     })
