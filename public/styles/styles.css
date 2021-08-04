@@ -22,6 +22,7 @@ body {
     flex-direction: column;
     align-items: center;
     font-family: 'Lato', Lato, sans-serif;
+    -webkit-appearance: none;
 }
 
 /* Navigation Styling */
