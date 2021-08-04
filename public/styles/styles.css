@@ -26,18 +26,24 @@ body {
 
 /* Navigation Styling */
 nav {
-    width: 100%;
+    width: 100vw;
     margin: 0;
     padding: 1% 0;
     height: 120px;
     background-color: var(--light-grey);
     border-bottom: var(--red) 4px solid;
     border-top: var(--red) 4px solid;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .nav-logo {
     margin-left: 1rem;
-    width: 225px;
+    /* width: 225px; */
+    max-width: 40%;
+    min-width: 100px;
     height: auto; 
     float: left;
     margin-top: 5px;
@@ -89,7 +95,7 @@ nav {
     .container-nav-dropdown {
         display: block;
         float: right;
-        margin-right: 3rem;
+        margin-right: 2rem;
         font-size: 2.7rem;
         padding: 0;
         position: relative;
@@ -106,6 +112,8 @@ nav {
 
     .navbar-dropdown-list.navbar-dropdown-open {
         display: block;
+        position: absolute;
+        right: .1rem;
         font-size: 1.4rem;
         box-shadow: 0px 4px 8px 0px var(--grey);
         z-index: 1;
@@ -116,6 +124,12 @@ nav {
 
     .navbar-dropdown-list.navbar-dropdown-open li {
         margin: 10px 0;
+    }
+
+    .nav-menu-icon {
+        /* position: fixed; */
+        /* font-size: 1.3rem; */
+        /* position: absolute; */
     }
 
     .nav-menu-icon a:link,
