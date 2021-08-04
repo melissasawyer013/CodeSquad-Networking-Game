@@ -31,6 +31,7 @@ module.exports = {
                 if(foundUser) {
                     authenticationInfo.githubUrlToMatch = foundUser.githubUrl;
                     authenticationInfo.githubProfileToMatch = foundUser.githubProfile;
+                    console.log('gonna redirect')
                     res.redirect('/profile/auth/github');
                 } else {
                     res.render('pages/login', { message: `It seems that your email does not match what we have. Try the email associated with CodeSquad, or email melissa@codesquad.org to verify you're using the correct email address or request a change in the email associated with your account.`, user: undefined });
@@ -46,7 +47,7 @@ module.exports = {
     githubCallback: [
         passport.authenticate('github', { failureRedirect: 'profile/login' }),
         function(req, res) {
-            if(req.isAuthenticated) {
+            if(req.isAuthenticated()) {
                 res.redirect('/');
             } else {
                 res.redirect('/profile/logout');
