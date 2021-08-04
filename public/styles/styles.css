@@ -92,6 +92,7 @@ nav {
         margin-right: 3rem;
         font-size: 2.7rem;
         padding: 0;
+        position: relative;
     }
 
     .container-nav-dropdown ul {
