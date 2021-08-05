@@ -55,8 +55,8 @@ nav {
 }
 
 .container-nav-list {
-    height: 120px;
-    padding: 30px 0 0 0;
+    /* height: 120px; */
+    /* padding: 30px 0 0 0; */
 }
 
 .container-nav-list ul {
@@ -121,6 +121,7 @@ nav {
         padding: 10px 20px;
         background-color: var(--light-grey);
         overflow: overlay;
+        width: 155px;
     }
 
     .navbar-dropdown-list.navbar-dropdown-open li {
