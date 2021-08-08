@@ -29,6 +29,16 @@ input[type=submit] {
     -webkit-appearance: none;
 }
 
+.overflow-break-word {
+    overflow-wrap: break-word;
+}
+
+.heading {
+    text-align: center;
+    color: var(--red);
+    text-shadow: 3px 2px var(--white);
+}
+
 /* input[type=date] {
     -webkit-appearance: none;
 } */

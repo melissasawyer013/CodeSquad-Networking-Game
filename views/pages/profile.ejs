@@ -14,16 +14,16 @@
                 <a href="/admin" class="link-button">Admin Dashboard</a>
             <% } %> 
         </div> 
-        <span>Name: <%= user.name %> </span>
-        <span>Email: <%= user.email %> </span>
-        <span>Cohort Year: <%= user.cohortYear %> </span>
-        <span>GitHub: <%= user.githubUrl %> </span>
-        <span>LinkedIn: <%= user.linkedinUrl %> </span>
-        <span>Total Points Earned: <%= user.totalPoints %> </span>
+        <span class="overflow-break-word">Name: <%= user.name %> </span>
+        <span class="overflow-break-word">Email: <%= user.email %> </span>
+        <span class="overflow-break-word">Cohort Year: <%= user.cohortYear %> </span>
+        <span class="overflow-break-word">GitHub: <%= user.githubUrl %> </span>
+        <span class="overflow-break-word">LinkedIn: <%= user.linkedinUrl %> </span>
+        <span class="overflow-break-word">Total Points Earned: <%= user.totalPoints %> </span>
         <br><br><br>
         <h2>Your Completed Tasks</h2>
         <div class="container-game-heading red-accents">
-            <h2>COMPLETED BASICS</h2>
+            <h2 class="heading">COMPLETED BASICS</h2>
         </div>
         <% completedTasks.forEach( task => { %>
             <% if(task.category === 'basics') { %>
