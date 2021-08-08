@@ -25,6 +25,10 @@ body {
     -webkit-appearance: none;
 }
 
+input[type=submit] {
+    -webkit-appearance: none;
+}
+
 /* Navigation Styling */
 nav {
     width: 100vw;
@@ -128,11 +132,11 @@ nav {
         margin: 10px 0;
     }
 
-    .nav-menu-icon {
-        /* position: fixed; */
-        /* font-size: 1.3rem; */
-        /* position: absolute; */
-    }
+    /* .nav-menu-icon {
+        position: fixed;
+        font-size: 1.3rem;
+        position: absolute;
+    } */
 
     .nav-menu-icon a:link,
     .nav-menu-icon a:visited {
@@ -400,7 +404,7 @@ iframe {
 
 .button-submit {
     font-size: 1.3rem;
-    padding: 1%;
+    padding: 5px;
     border-width: 2px;
     border-style: outset;
     border-color: var(--white);
@@ -492,27 +496,6 @@ tr {
 .container-game-heading h2 {
     text-align: center;
     margin: 10px;
-}
-
-.container-game-row-controls {
-    width: 15%;
-    display: flex;
-    flex-direction: column;
-    margin-left: 10px;
-}
-
-.container-game-row-controls span {
-    margin: 3px 0;
-}
-
-.container-game-row-controls input {
-    margin: 3px 0;
-}
-
-.container-game-row-controls input[type=submit] {
-    width: fit-content;
-    padding: 8px;
-    align-self: center;
 }
 
 .red-accents {
@@ -629,6 +612,11 @@ tr {
     text-shadow: 3px 2px var(--dark-grey);
 }
 
+.button-submit.grey-accents {
+    color: var(--white);
+    background-color: var(--dark-grey);
+}
+
 .button-submit:link,
 .button-submit:visited {
     text-decoration: none;
@@ -642,6 +630,148 @@ tr {
 }
 
 .container-game-row {
+    width: 100%;
+    border-left: var(--dark-grey) 2px solid;
+    border-right: var(--dark-grey) 2px solid;
+    border-top: var(--dark-grey) 1px solid;
+    border-bottom: var(--dark-grey) 1px solid;
+    display: flex;
+    padding: 1rem;
+    align-self: center;
+}
+
+.container-game-row form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    
+}
+
+.container-game-row-task {
+    width: 95%;
+    align-self: center;
+}
+
+.container-game-row-controls {
+    width: 95%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    align-self: center;
+    /* flex-wrap: wrap; */
+}
+
+.container-game-row-small {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 40%;
+    align-items: center;
+}
+
+.container-game-date {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    align-items: center;
+}
+
+div.container-game-date > * {
+    margin-right: 5px;
+}
+
+@media screen and (min-width: 1px) and (max-width: 500px) {
+    .container-game-row-small {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .container-game-row-controls {
+        justify-content: space-between;
+    }
+
+    .container-game-date {
+        align-items: flex-end;
+    }
+
+    .container-game-date-no-button label {
+        text-align: right;
+    }
+}
+
+@media screen and (min-width: 501px) and (max-width: 600px) {
+    .container-game-date-no-button label {
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 1px) and (max-width: 600px) {
+    .container-game-date-no-button {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container-game-row-small {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 700px) and (max-width: 1200px) {
+    .container-game-row-small {
+        width: 33%;
+    }
+}
+
+@media screen and (min-width: 1px) and (max-width: 699px) {
+    .container-game-row-controls {
+        margin-top: 5px;
+    }
+
+    .container-game-date {
+        flex-direction: column;
+    }
+}
+
+@media screen and (min-width: 901px) and (max-width: 1030px) {
+    .container-game-date-no-button {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container-game-date-no-button label {
+        text-align: center;
+    }
+
+    .container-game-row-small.completed-tasks {
+        width: 40%;
+    }
+}
+
+/* .container-game-row-controls {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.container-game-row-controls span {
+    margin: 3px 0;
+}
+
+.container-game-row-controls input {
+    margin: 3px 0;
+}
+
+.container-game-row-controls input[type=submit] {
+    width: fit-content;
+    padding: 8px;
+    align-self: center;
+} */
+
+/* .container-game-row {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -649,21 +779,36 @@ tr {
     border-left: var(--dark-grey) 2px solid;
     border-right: var(--dark-grey) 2px solid;
     border-top: var(--dark-grey) 1px solid;
-    border-bottom: var(--dark-grey) 1px solid;;
-}
+    border-bottom: var(--dark-grey) 1px solid;
+} */
 
-.container-game-row form {
+/* .container-game-row form {
     display: flex;
     width: 100%;
-}
+} */
 
-.container-game-row-task {
+/* .container-game-row-task {
     width: 75%;
     margin-left: 10px;
     padding: 10px;
     display: flex;
     flex-direction: column;
-}
+} */
+
+/* .container-game-row-small {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+} */
+
+/* .container-game-date {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px 10px 10px 0;
+} */
 
 .text-strikethrough {
     text-decoration: line-through;
@@ -673,24 +818,8 @@ tr {
     background-color: var(--light-grey);
 }
 
-.container-game-row-small {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    align-items: center;
-}
 
-.container-game-date {
-    width: 20%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 10px 10px 10px 0;
-}
-
-
-
-@media screen and (min-width: 1px) and (max-width: 550px) {
+/* @media screen and (min-width: 1px) and (max-width: 550px) {
     .container-game-row {
         display: flex;
         flex-direction: column;;
@@ -709,8 +838,6 @@ tr {
     .container-game-row-task {
         max-width: 90%;
         width: 90%;
-        /* padding: 10px 25px;
-        margin: 0 10px; */
         word-wrap: wrap;
     }
     
@@ -812,7 +939,7 @@ tr {
     .container-game-date label {
         margin-right: 10px;
     }
-}
+} */
 
 .container-table-game {
     overflow-x: scroll;
