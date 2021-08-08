@@ -29,9 +29,9 @@ input[type=submit] {
     -webkit-appearance: none;
 }
 
-input[type=date] {
+/* input[type=date] {
     -webkit-appearance: none;
-}
+} */
 
 /* Navigation Styling */
 nav {
@@ -496,6 +496,7 @@ tr {
     border: var(--dark-grey) solid 2px;
     width: 100%;
     padding: 1rem;
+    align-self: center;
 }
 
 .container-game-heading h2 {
