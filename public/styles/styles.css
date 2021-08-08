@@ -693,6 +693,10 @@ div.container-game-date > * {
     .container-game-date label {
         text-align: center;
     }
+
+    .container-game-date input {
+        align-self: center;
+    }
 }
 
 @media screen and (min-width: 1px) and (max-width: 500px) {
