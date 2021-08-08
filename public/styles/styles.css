@@ -29,6 +29,10 @@ input[type=submit] {
     -webkit-appearance: none;
 }
 
+input[type=date] {
+    -webkit-appearance: none;
+}
+
 /* Navigation Styling */
 nav {
     width: 100vw;
@@ -491,6 +495,7 @@ tr {
 .container-game-heading {
     border: var(--dark-grey) solid 2px;
     width: 100%;
+    padding: 1rem;
 }
 
 .container-game-heading h2 {
@@ -681,6 +686,12 @@ tr {
 
 div.container-game-date > * {
     margin-right: 5px;
+}
+
+@media screen and (min-width: 1px) and (max-width: 403px) {
+    .container-game-date label {
+        text-align: center;
+    }
 }
 
 @media screen and (min-width: 1px) and (max-width: 500px) {

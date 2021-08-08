@@ -8,50 +8,6 @@
         <p>
             You must <a href="/profile/login" class="container-content-link">login</a> to earn points. See the <a href="/about" class="container-content-link">About</a> page to learn more.
         </p> 
-        
-        <% let date = new Date; %>
-        <% let dateValue = date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString().padStart(2, 0) + '-' + date.getDate().toString().padStart(2, 0); %> 
-
-        <div class="container-game-row">
-            <% redirect = 'game new' %> 
-            <form action="/profile/checkUpdateTaskDate?_method=PUT " method="POST" enctype="application/x-www-form-urlencoded">
-                    <div class="container-game-row-task">
-                        update resume with feedback from industry volunteer or CodeSquad staff (max 1 per day)
-                    </div>
-                    <div class="container-game-row-controls red-accents">
-                        <div class="container-game-row-small">
-                            <input type="submit" value="ADD" class="button-submit red-accents">
-                            <span class="text-center">points: 10</span> 
-                        </div>
-                        <div class="container-game-date">
-                            <label for="dateCompleted">Date Completed: </label>
-                            <input type="date" name="dateCompleted" id="dateCompleted" value="<%= dateValue %>">
-                        </div>
-                    </div>
-            </form>
-        </div>
-
-        <div class="container-game-row">
-            <form action="/profile/checkUpdateTaskDate?_method=PUT " method="POST" enctype="application/x-www-form-urlencoded">
-                <div class="container-game-row-task">
-                    spend 1 hour on a portfolio project or web dev course
-                </div>
-                <div class="container-game-row-controls red-accents">
-                    <div class="container-game-row-small completed-tasks">
-                        <a href="/profile/deleteTask/id" class="button-submit grey-accents">DELETE</a>
-                        <span class="text-center">points: 5</span>
-                    </div>
-                    <div class="container-game-date">
-                        <div class="container-game-date-no-button">
-                            <label for="dateCompleted">Completed:</label>
-                            <input type="date" name="dateCompleted" id="dateCompleted" value="<%= dateValue %>">
-                        </div>
-                        <input type="submit" value="UPDATE" class="button-submit red-accents">  
-                    </div>
-                </div>
-            </form>   
-        </div>
-
     <% } else { %>
         <p>Welcome <%= user.name %>! Check off the tasks you've completed below in order to score points.</p>
         <h2 class="text-center">YOUR TOTAL POINTS: <%= user.totalPoints %> </h2>
