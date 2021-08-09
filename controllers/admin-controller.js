@@ -140,7 +140,7 @@ module.exports = {
                     if (err) {
                         return err;
                     } else {
-                        res.redirect(`/admin/graduateEdit/${id}`);
+                        res.redirect(`/admin/graduatesList`);
                     };
                 })
             } else {
