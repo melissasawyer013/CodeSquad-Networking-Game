@@ -99,6 +99,9 @@
                 <%- include ('../partials/game-row', {task: task, user: user, style: 'done all', color: 'yellow-accents'}) %>
             <% } %> 
         <% }) %>
+        <% if(tasksCompletedAllTime === []) { %>
+            <%- include ('../partials/game-row', { user: user, style: 'none to display', color: 'yellow-accents'}) %>
+        <% } %> 
 
         <div class="container-game-heading green-accents">
             <h2>COMPLETED PORTFOLIO</h2>
