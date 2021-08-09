@@ -3,7 +3,7 @@
 
 <div class="container-content">
     <h1>Scoreboards</h1>
-    <h2>Monthly Points Scoreboard</h2>
+    <h2 class="heading">Monthly Points Scoreboard</h2>
     <% let place; %> 
     <% for (let i = 0; i < 3; i++) { %>
         <% if(i===0) { %>
@@ -18,7 +18,7 @@
         <%- include ('../partials/scoreboard-row', {grad: sortedGradsMonth[i], place: place, board: 'monthly'}) %> 
     <% } %> 
 
-    <h2>All-Time Points Scoreboard</h2>
+    <h2 class="heading">All-Time Points Scoreboard</h2>
     <% for (let i = 0; i < 3; i++) { %>
         <% if(i===0) { %>
             <% place = 'First Place'; %> 
