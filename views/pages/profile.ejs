@@ -25,56 +25,86 @@
         <div class="container-game-heading red-accents">
             <h2>COMPLETED BASICS</h2>
         </div>
+        <% let tasksCompletedBasics = 0; %>
         <% completedTasks.forEach( task => { %>
             <% if(task.category === 'basics') { %>
                 <%- include ('../partials/profile-completed-row', {task: task, user: user, style: 'done all', color: 'red-accents'}) %>
+                <% tasksCompletedBasics += 1; %>
             <% } %> 
         <% }) %>
+        <% if(tasksCompletedBasics === 0) { %>
+            <%- include ('../partials/profile-completed-row', { user: user, style: 'none to display', color: 'red-accents'}) %>
+        <% } %>
 
         <div class="container-game-heading orange-accents">
             <h2>COMPLETED PROFILE</h2>
         </div>
+        <% let tasksCompletedProfile = 0; %>
         <% completedTasks.forEach( task => { %>
             <% if(task.category === 'profile') { %>
                 <%- include ('../partials/profile-completed-row', {task: task, user: user, style: 'done all', color: 'orange-accents'}) %>
+                <% tasksCompletedProfile += 1; %>
             <% } %> 
         <% }) %>
+        <% if(tasksCompletedProfile === 0) { %>
+            <%- include ('../partials/profile-completed-row', { user: user, style: 'none to display', color: 'orange-accents'}) %>
+        <% } %> 
 
         <div class="container-game-heading yellow-accents">
             <h2>COMPLETED LEARNING</h2>
         </div>
+        <% let tasksCompletedLearning = 0; %>
         <% completedTasks.forEach( task => { %>
             <% if(task.category === 'learning') { %>
                 <%- include ('../partials/profile-completed-row', {task: task, user: user, style: 'done all', color: 'yellow-accents'}) %>
+                <% tasksCompletedLearning += 1; %>
             <% } %> 
         <% }) %>
+        <% if(tasksCompletedLearning === 0) { %>
+            <%- include ('../partials/profile-completed-row', { user: user, style: 'none to display', color: 'yellow-accents'}) %>
+        <% } %> 
 
         <div class="container-game-heading green-accents">
             <h2>COMPLETED PORTFOLIO</h2>
         </div>
+        <% let tasksCompletedPortfolio = 0; %>
         <% completedTasks.forEach( task => { %>
             <% if(task.category === 'portfolio') { %>
                 <%- include ('../partials/profile-completed-row', {task: task, user: user, style: 'done all', color: 'green-accents'}) %>
+                <% tasksCompletedPortfolio += 1; %>
             <% } %> 
         <% }) %>
+        <% if(tasksCompletedPortfolio === 0) { %>
+            <%- include ('../partials/profile-completed-row', { user: user, style: 'none to display', color: 'green-accents'}) %>
+        <% } %>
 
         <div class="container-game-heading blue-accents">
             <h2>COMPLETED NETWORK</h2>
         </div>
+        <% let tasksCompletedNetwork = 0; %>
         <% completedTasks.forEach( task => { %>
             <% if(task.category === 'network') { %>
                 <%- include ('../partials/profile-completed-row', {task: task, user: user, style: 'done all', color: 'blue-accents'}) %>
+                <% tasksCompletedNetwork += 1; %>
             <% } %> 
         <% }) %>
+        <% if(tasksCompletedNetwork === 0) { %>
+            <%- include ('../partials/profile-completed-row', { user: user, style: 'none to display', color: 'blue-accents'}) %>
+        <% } %>
 
         <div class="container-game-heading purple-accents">
             <h2>COMPLETED JOBS</h2>
         </div>
+        <% let tasksCompletedJobs = 0; %>
         <% completedTasks.forEach( task => { %>
             <% if(task.category === 'jobs') { %>
                 <%- include ('../partials/profile-completed-row', {task: task, user: user, style: 'done all', color: 'purple-accents'}) %>
+                <% tasksCompletedJobs += 1; %>
             <% } %> 
         <% }) %>
+        <% if(tasksCompletedJobs === 0) { %>
+            <%- include ('../partials/profile-completed-row', { user: user, style: 'none to display', color: 'purple-accents'}) %>
+        <% } %>
     <% } %> 
 
 

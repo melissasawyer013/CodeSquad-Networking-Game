@@ -1,21 +1,29 @@
-<div class="container-game-row">
-    <% let redirect = 'profile' %> 
-    <form action="/profile/checkUpdateTaskDate/<%= task._id %>/<%= task.maxRate %>/<%= task.task %>/<%= redirect %>/?_method=PUT" method="POST" enctype="application/x-www-form-urlencoded">
-        <div class="container-game-row-task">
-            <%= task.task %>
-        </div>
-        <div class="container-game-row-controls <%= color %>">
-            <div class="container-game-row-small completed-tasks">
-                <a href="/profile/deleteTask/<%= task._id %>/<%= redirect %>" class="button-submit grey-accents">DELETE</a>
-                <span class="text-center">points: <%= task.points %></span>
+<% if(style === 'done all') { %> 
+    <div class="container-game-row">
+        <% let redirect = 'profile' %> 
+        <form action="/profile/checkUpdateTaskDate/<%= task._id %>/<%= task.maxRate %>/<%= task.task %>/<%= redirect %>/?_method=PUT" method="POST" enctype="application/x-www-form-urlencoded">
+            <div class="container-game-row-task">
+                <%= task.task %>
             </div>
-            <div class="container-game-date">
-                <div class="container-game-date-no-button">
-                    <label for="dateCompleted">Completed:</label>
-                    <input type="date" name="dateCompleted" id="dateCompleted" value="<%= task.dateCompleted %>">
+            <div class="container-game-row-controls <%= color %>">
+                <div class="container-game-row-small completed-tasks">
+                    <a href="/profile/deleteTask/<%= task._id %>/<%= redirect %>" class="button-submit grey-accents">DELETE</a>
+                    <span class="text-center">points: <%= task.points %></span>
                 </div>
-                <input type="submit" value="UPDATE" class="button-submit <%= color %>">  
+                <div class="container-game-date">
+                    <div class="container-game-date-no-button">
+                        <label for="dateCompleted">Completed:</label>
+                        <input type="date" name="dateCompleted" id="dateCompleted" value="<%= task.dateCompleted %>">
+                    </div>
+                    <input type="submit" value="UPDATE" class="button-submit <%= color %>">  
+                </div>
             </div>
+        </form>
+    </div>
+<% } else if(style === 'none to display') { %>
+    <div class="container-game-row">
+        <div class="container-game-row-task text-center">
+            No tasks to display.
         </div>
-    </form>
-</div>
+    </div>
+<% } %> 
