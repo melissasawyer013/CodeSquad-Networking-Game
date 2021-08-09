@@ -86,6 +86,7 @@ nav {
 
 .container-nav-list li {
     font-size: 1.4rem;
+    white-space: nowrap;
 }
 
 .container-nav-list a {

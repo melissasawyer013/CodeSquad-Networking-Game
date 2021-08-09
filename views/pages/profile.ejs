@@ -21,9 +21,9 @@
         <span class="overflow-break-word">LinkedIn: <%= user.linkedinUrl %> </span>
         <span class="overflow-break-word">Total Points Earned: <%= user.totalPoints %> </span>
         <br><br><br>
-        <h2>Your Completed Tasks</h2>
+        <h2 class="heading">Your Completed Tasks</h2>
         <div class="container-game-heading red-accents">
-            <h2 class="heading">COMPLETED BASICS</h2>
+            <h2>COMPLETED BASICS</h2>
         </div>
         <% completedTasks.forEach( task => { %>
             <% if(task.category === 'basics') { %>
