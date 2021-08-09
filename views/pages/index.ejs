@@ -94,12 +94,14 @@
         <div class="container-game-heading yellow-accents">
             <h2>COMPLETED LEARNING</h2>
         </div>
+        <% let tasksCompletedLearning = 0; %> 
         <% tasksCompletedAllTime.forEach( task => { %>
             <% if(task.category === 'learning') { %>
                 <%- include ('../partials/game-row', {task: task, user: user, style: 'done all', color: 'yellow-accents'}) %>
+                <% tasksCompletedLearning += 1; %> 
             <% } %> 
         <% }) %>
-        <% if(tasksCompletedAllTime.length === 0) { %>
+        <% if(tasksCompletedLearning === 0) { %>
             <%- include ('../partials/game-row', { user: user, style: 'none to display', color: 'yellow-accents'}) %>
         <% } %> 
 
