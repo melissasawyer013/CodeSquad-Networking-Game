@@ -99,7 +99,7 @@
                 <%- include ('../partials/game-row', {task: task, user: user, style: 'done all', color: 'yellow-accents'}) %>
             <% } %> 
         <% }) %>
-        <% if(tasksCompletedAllTime === []) { %>
+        <% if(tasksCompletedAllTime.length === 0) { %>
             <%- include ('../partials/game-row', { user: user, style: 'none to display', color: 'yellow-accents'}) %>
         <% } %> 
 
