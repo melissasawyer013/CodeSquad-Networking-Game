@@ -14,61 +14,91 @@
         <div class="container-game-heading red-accents">
             <h2>Start with the BASICS.</h2>
         </div>
+        <% let tasksToDoBasics = 0; %>
         <% tasksCanAddToday.forEach( task => { %>
             <% if(task.category === 'basics') { %>
                 <%- include ('../partials/game-row', {task: task, user: user, style: 'regular', color: 'red-accents'}) %>
+                <% tasksToDoBasics += 1; %>
             <% } %> 
         <% }) %>
+        <% if(tasksToDoBasics === 0) { %>
+            <%- include ('../partials/game-row', { user: user, style: 'none to display', color: 'red-accents'}) %>
+        <% } %>
         <!-- Took out tasksCompletedToday loop here  -->
         
         <div class="container-game-heading orange-accents">
             <h2>Improve your PROFILE.</h2>
         </div>
+        <% let tasksToDoProfile = 0; %>
         <% tasksCanAddToday.forEach( task => { %>
             <% if(task.category === 'profile') { %>
                 <%- include ('../partials/game-row', {task: task, user: user, style: 'regular', color: 'orange-accents'}) %>
+                <% tasksToDoProfile += 1; %>
             <% } %> 
         <% }) %>
+        <% if(tasksToDoProfile === 0) { %>
+            <%- include ('../partials/game-row', { user: user, style: 'none to display', color: 'orange-accents'}) %>
+        <% } %>
         <!-- Took out tasksCompletedToday loop here  -->
 
         <div class="container-game-heading yellow-accents">
             <h2>Continue your LEARNING.</h2>
         </div>
+        <% let tasksToDoLearning = 0; %>
         <% tasksCanAddToday.forEach( task => { %>
             <% if(task.category === 'learning') { %>
                 <%- include ('../partials/game-row', {task: task, user: user, style: 'regular', color: 'yellow-accents'}) %>
+                <% tasksToDoLearning += 1; %>
             <% } %> 
         <% }) %>
+        <% if(tasksToDoLearning === 0) { %>
+            <%- include ('../partials/game-row', { user: user, style: 'none to display', color: 'yellow-accents'}) %>
+        <% } %>
         <!-- Took out tasksCompletedToday loop here  -->
 
         <div class="container-game-heading green-accents">
             <h2>Build your PORTFOLIO.</h2>
         </div>
+        <% let tasksToDoPortfolio = 0; %>
         <% tasksCanAddToday.forEach( task => { %>
             <% if(task.category === 'portfolio') { %>
                 <%- include ('../partials/game-row', {task: task, user: user, style: 'regular', color: 'green-accents'}) %>
+                <% tasksToDoPortfolio += 1; %>
             <% } %> 
         <% }) %>
+        <% if(tasksToDoPortfolio === 0) { %>
+            <%- include ('../partials/game-row', { user: user, style: 'none to display', color: 'green-accents'}) %>
+        <% } %>
         <!-- Took out tasksCompletedToday loop here  -->
 
         <div class="container-game-heading blue-accents">
             <h2>Extend your NETWORK.</h2>
         </div>
+        <% let tasksToDoNetwork = 0; %>
         <% tasksCanAddToday.forEach( task => { %>
             <% if(task.category === 'network') { %>
                 <%- include ('../partials/game-row', {task: task, user: user, style: 'regular', color: 'blue-accents'}) %>
+                <% tasksToDoNetwork += 1; %>
             <% } %> 
         <% }) %>
+        <% if(tasksToDoNetwork === 0) { %>
+            <%- include ('../partials/game-row', { user: user, style: 'none to display', color: 'blue-accents'}) %>
+        <% } %>
         <!-- Took out tasksCompletedToday loop here  -->
 
         <div class="container-game-heading purple-accents">
             <h2>Apply for JOBS.</h2>
         </div>
+        <% let tasksToDoJobs = 0; %>
         <% tasksCanAddToday.forEach( task => { %>
             <% if(task.category === 'jobs') { %>
                 <%- include ('../partials/game-row', {task: task, user: user, style: 'regular', color: 'purple-accents'}) %>
+                <% tasksToDoJobs += 1; %>
             <% } %> 
         <% }) %>
+        <% if(tasksToDoJobs === 0) { %>
+            <%- include ('../partials/game-row', { user: user, style: 'none to display', color: 'purple-accents'}) %>
+        <% } %>
         <!-- Took out tasksCompletedToday loop here  -->
 
         <br><br><br>
@@ -76,20 +106,30 @@
         <div class="container-game-heading red-accents">
             <h2>COMPLETED BASICS</h2>
         </div>
+        <% let tasksCompletedBasics = 0; %>
         <% tasksCompletedAllTime.forEach( task => { %>
             <% if(task.category === 'basics') { %>
                 <%- include ('../partials/game-row', {task: task, user: user, style: 'done all', color: 'red-accents'}) %>
+                <% tasksCompletedBasics += 1; %>
             <% } %> 
         <% }) %>
+        <% if(tasksCompletedBasics === 0) { %>
+            <%- include ('../partials/game-row', { user: user, style: 'none to display', color: 'red-accents'}) %>
+        <% } %>
 
         <div class="container-game-heading orange-accents">
             <h2>COMPLETED PROFILE</h2>
         </div>
+        <% let tasksCompletedProfile = 0; %>
         <% tasksCompletedAllTime.forEach( task => { %>
             <% if(task.category === 'profile') { %>
                 <%- include ('../partials/game-row', {task: task, user: user, style: 'done all', color: 'orange-accents'}) %>
+                <% tasksCompletedProfile += 1; %>
             <% } %> 
         <% }) %>
+        <% if(tasksCompletedProfile === 0) { %>
+            <%- include ('../partials/game-row', { user: user, style: 'none to display', color: 'orange-accents'}) %>
+        <% } %> 
 
         <div class="container-game-heading yellow-accents">
             <h2>COMPLETED LEARNING</h2>
@@ -108,29 +148,44 @@
         <div class="container-game-heading green-accents">
             <h2>COMPLETED PORTFOLIO</h2>
         </div>
+        <% let tasksCompletedPortfolio = 0; %>
         <% tasksCompletedAllTime.forEach( task => { %>
             <% if(task.category === 'portfolio') { %>
                 <%- include ('../partials/game-row', {task: task, user: user, style: 'done all', color: 'green-accents'}) %>
+                <% tasksCompletedPortfolio += 1; %>
             <% } %> 
         <% }) %>
+        <% if(tasksCompletedPortfolio === 0) { %>
+            <%- include ('../partials/game-row', { user: user, style: 'none to display', color: 'green-accents'}) %>
+        <% } %>
 
         <div class="container-game-heading blue-accents">
             <h2>COMPLETED NETWORK</h2>
         </div>
+        <% let tasksCompletedNetwork = 0; %>
         <% tasksCompletedAllTime.forEach( task => { %>
             <% if(task.category === 'network') { %>
                 <%- include ('../partials/game-row', {task: task, user: user, style: 'done all', color: 'blue-accents'}) %>
+                <% tasksCompletedNetwork += 1; %>
             <% } %> 
         <% }) %>
+        <% if(tasksCompletedNetwork === 0) { %>
+            <%- include ('../partials/game-row', { user: user, style: 'none to display', color: 'blue-accents'}) %>
+        <% } %>
 
         <div class="container-game-heading purple-accents">
             <h2>COMPLETED JOBS</h2>
         </div>
+        <% let tasksCompletedJobs = 0; %>
         <% tasksCompletedAllTime.forEach( task => { %>
             <% if(task.category === 'jobs') { %>
                 <%- include ('../partials/game-row', {task: task, user: user, style: 'done all', color: 'purple-accents'}) %>
+                <% tasksCompletedJobs += 1; %>
             <% } %> 
         <% }) %>
+        <% if(tasksCompletedJobs === 0) { %>
+            <%- include ('../partials/game-row', { user: user, style: 'none to display', color: 'purple-accents'}) %>
+        <% } %>
 
 
 
