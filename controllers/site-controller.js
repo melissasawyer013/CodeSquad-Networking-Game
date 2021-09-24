@@ -3,6 +3,7 @@ const GameTask = require('../models/gameTaskSchema');
 module.exports = {
     index: (req, res) => {
         if(req.isAuthenticated()) {
+            // let message = undefined;
             // creats a variable called today that gets the value for today's date from the date Object and formats it as a string: "YYYY-MM-DD"
             let date = new Date;
             let today = date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString().padStart(2, 0) + '-' + date.getDate().toString().padStart(2, 0);
