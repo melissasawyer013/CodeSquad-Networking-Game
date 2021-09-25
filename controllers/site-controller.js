@@ -1,7 +1,13 @@
 const GameTask = require('../models/gameTaskSchema');
 
 module.exports = {
+    indexAddMessage: (req, res) => {
+        let message = `none`;
+        res.redirect(`/home/${message}`);
+    },
+
     index: (req, res) => {
+        let { message } = req.params;
         if(req.isAuthenticated()) {
             // let message = undefined;
             // creats a variable called today that gets the value for today's date from the date Object and formats it as a string: "YYYY-MM-DD"
@@ -47,11 +53,11 @@ module.exports = {
                             }); 
                         };
                     });
-                    res.render('pages/index', {user: req.user,  tasksCompletedAllTime: tasksCompletedAllTime, tasksCompletedToday: tasksCompletedToday, tasksCanAddToday: tasksCanAddToday})
+                    res.render('pages/index', {user: req.user,  tasksCompletedAllTime: tasksCompletedAllTime, tasksCompletedToday: tasksCompletedToday, tasksCanAddToday: tasksCanAddToday, message: message})
                 }
             })
         } else {
-            res.render('pages/index', {user: undefined});
+            res.render('pages/index', {user: undefined, message: message});
         }
     },
 

@@ -59,6 +59,10 @@ passport.deserializeUser(function(id, done) {
 passport.use(new GitHubStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
+    // callbackURL for local
+    // callbackURL: "http://localhost:5500/profile/auth/github/callback"
+    
+    //callbackURL for live
     callbackURL: "https://codesquad-the-game.herokuapp.com/profile/auth/github/callback"
 },
     function(accessToken, refreshToken, profile, done) {

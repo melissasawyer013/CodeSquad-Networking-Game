@@ -3,6 +3,9 @@ const router = express.Router();
 const siteController = require('../controllers/site-controller');
 
 router.route('/')
+    .get(siteController.indexAddMessage)
+
+router.route('/home/:message')
     .get(siteController.index);
 
 router.route('/about')
