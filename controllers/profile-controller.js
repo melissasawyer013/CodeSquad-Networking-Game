@@ -177,7 +177,7 @@ module.exports = {
 //Eventually have profile/homepage accept messages and send a message that they can't change the date completed to that date because the same task has already been completed on that day, and you can only do it once per day.                    
                         let message = `You can't do that because you already completed that task on that date.`
                         if(redirect === 'profile') {
-                            res.redirect(`/profile/${message}`);
+                            res.redirect(`/profile/page/${message}`);
                             //Without the return err, got error: Cannot set headers after they are sent to the client.
                             return err;
                             break;
@@ -222,7 +222,7 @@ module.exports = {
                     if(!result){
                         let message = `Success! Your task and points have been recorded.`;
                         if (redirect === 'profile') {
-                            res.redirect(`/profile/${message}`);
+                            res.redirect(`/profile/page/${message}`);
                         } else if (redirect === 'game') {
                             res.redirect(`/home/${message}`);
                         };   
@@ -268,7 +268,7 @@ module.exports = {
                     if(!result){
                         let message = `Try again. We couldn't find that task in the database.`;
                         if (redirect === 'profile') {
-                            res.redirect(`/profile/${message}`);
+                            res.redirect(`/profile/page/${message}`);
                         } else if (redirect === 'game') {
                             res.redirect(`/home/${message}`);
                         };   
@@ -287,7 +287,7 @@ module.exports = {
                                     } else {
                                         let message = `The date completed has successfully been updated!`;
                                         if (redirect === 'profile') {
-                                            res.redirect(`/profile/${message}`);
+                                            res.redirect(`/profile/page/${message}`);
                                         } else if (redirect === 'game') {
                                             res.redirect(`/home/${message}`);
                                         };   
@@ -316,7 +316,7 @@ module.exports = {
                     if(!result) {
                         let message = `There was an error in deleting the task. Try again please.`;
                         if (redirect === 'profile') {
-                            res.redirect(`/profile/${message}`);
+                            res.redirect(`/profile/page/${message}`);
                         } else if (redirect === 'game') {
                             res.redirect(`/home/${message}`);
                         }; 
@@ -359,7 +359,7 @@ module.exports = {
                     if(!result) {
                         let message = `Try again. There was some difficulty in deleting that task.`
                         if (redirect === 'profile') {
-                            res.redirect(`/profile/${message}`);
+                            res.redirect(`/profile/page/${message}`);
                         } else if (redirect === 'game') {
                             res.redirect(`/home/${message}`);
                         };
@@ -376,7 +376,7 @@ module.exports = {
                                     } else {
                                         let message = `The task has been deleted!`;
                                         if (redirect === 'profile') {
-                                            res.redirect(`/profile/${message}`);
+                                            res.redirect(`/profile/page/${message}`);
                                         } else if (redirect === 'game') {
                                             res.redirect(`/home/${message}`);
                                         };   
