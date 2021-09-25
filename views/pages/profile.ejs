@@ -3,9 +3,6 @@
 
 <div class="container-content">
     <h1>Profile: <%= user.name  %> </h1>
-    <% if(message != undefined ) { %>
-        <%= message %> 
-    <% } %> 
     <% if(user != undefined) { %>
         <div class="container-buttons-row">
             <a href="/profile/editProfile/<%= user._id %>" class="link-button">Edit Profile Information</a>
@@ -20,7 +17,9 @@
         <span class="overflow-break-word">GitHub: <%= user.githubUrl %> </span>
         <span class="overflow-break-word">LinkedIn: <%= user.linkedinUrl %> </span>
         <span class="overflow-break-word">Total Points Earned: <%= user.totalPoints %> </span>
-        <br><br><br>
+        <% if( message != `none`) { %>
+            <p class="text-bold"><%= message %></p>
+        <% } %>
         <h2 class="heading">Your Completed Tasks</h2>
         <div class="container-game-heading red-accents">
             <h2>COMPLETED BASICS</h2>

@@ -1,6 +1,7 @@
 <tr>
+    <% let message = `none`; %> 
     <td><img src="<%= graduate.photoUrl %>" alt="headshot of graduate" class="image-graduate-list"></td>
     <td><%= graduate.name %></td>
     <td class="text-center"><%= graduate.cohortYear %></td>
-    <td class="text-center"><a href="/admin/graduateEdit/<%= graduate._id %>" class="link-button">Edit</a></td>
+    <td class="text-center"><a href="/admin/graduateEdit/<%= graduate._id %>/<%= message %>" class="link-button">Edit</a></td>
 </tr>

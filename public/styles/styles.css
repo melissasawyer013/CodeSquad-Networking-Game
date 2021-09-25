@@ -390,6 +390,10 @@ iframe {
     text-align: center;
 }
 
+.text-bold {
+    font-weight: bold;
+}
+
 .container-content-link:link,
 .container-content-link:visited {
     color: var(--dark-grey);

@@ -8,7 +8,8 @@ const authenticationInfo = require('../config/authorization');
 module.exports = {
     profile: (req, res) => {
         if(req.isAuthenticated()) {
-            res.render('pages/profile', { user: req.user, message: undefined, completedTasks: req.user.tasksCompleted });    
+            const { message } = req.params;
+            res.render('pages/profile', { user: req.user, message: message, completedTasks: req.user.tasksCompleted });    
         } else {
             res.render('pages/login', { message: `You need to be logged in to access this page. Please login now.`, user: undefined })
         }; 
@@ -31,7 +32,7 @@ module.exports = {
                 if(foundUser) {
                     authenticationInfo.githubUrlToMatch = foundUser.githubUrl;
                     authenticationInfo.githubProfileToMatch = foundUser.githubProfile;
-                    console.log('gonna redirect')
+                    //to work locally, must change GitHub callback URL in GitHub dev tools from https://codesquad-the-game.herokuapp.com/profile/auth/github/callback to http://localhost:5500/profile/auth/github/callback - also need to change the graduateSchema.js line 62 or 63
                     res.redirect('/profile/auth/github');
                 } else {
                     res.render('pages/login', { message: `It seems that your email does not match what we have. Try the email associated with CodeSquad, or email melissa@codesquad.org to verify you're using the correct email address or request a change in the email associated with your account.`, user: undefined });
@@ -48,7 +49,8 @@ module.exports = {
         passport.authenticate('github', { failureRedirect: 'profile/login' }),
         function(req, res) {
             if(req.isAuthenticated()) {
-                res.redirect('/');
+                let message = `none`;
+                res.redirect(`/home/${message}`);
             } else {
                 res.redirect('/profile/logout');
             };
@@ -56,13 +58,14 @@ module.exports = {
     ],
 
     logout: (req, res) => {
+        let message = `none`;
         if(req.isAuthenticated()) {
             req.logout();
             authenticationInfo.githubProfileToMatch = undefined;
             authenticationInfo.githubUrlToMatch = undefined;
-            res.redirect('/');    
+            res.redirect(`/home/${message}`);    
         } else {
-            res.redirect('/')
+            res.redirect(`/home/${message}`)
         } 
     },
 
@@ -124,7 +127,8 @@ module.exports = {
                         if(error) {
                             return error;
                         } else {
-                            res.redirect('/')
+                            let message = `The task was marked complete, and your point total went up by ${gameTaskPoints}.`;
+                            res.redirect(`/home/${message}`)
                         }
                     })
                 }
@@ -169,14 +173,15 @@ module.exports = {
                 for( let i = 0; i < tasksCompletedArray.length; i++) {
                     //for each task in tasksCompleted array in database, flag
                     if (task === tasksCompletedArray[i].task && req.body.dateCompleted === tasksCompletedArray[i].dateCompleted) {
-//Eventually have profile/homepage accept messages and send a message that they can't change the date completed to that date because the same task has already been completed on that day, and you can only do it once per day.
+//Eventually have profile/homepage accept messages and send a message that they can't change the date completed to that date because the same task has already been completed on that day, and you can only do it once per day.                    
+                        let message = `You can't do that because you already completed that task on that date.`
                         if(redirect === 'profile') {
-                            res.redirect('/profile');
+                            res.redirect(`/profile/${message}`);
                             //Without the return err, got error: Cannot set headers after they are sent to the client.
                             return err;
                             break;
                         } else if (redirect === 'game' || redirect === 'game new') {
-                            res.redirect('/');
+                            res.redirect(`/home/${message}`);
                             //Without the return err, got error: Cannot set headers after they are sent to the client.
                             return err;
                             break;
@@ -214,10 +219,11 @@ module.exports = {
             Graduate.findById(req.user._id, function(err, result) {
                 if(!err) {
                     if(!result){
+                        let message = `Success! Your task and points have been recorded.`;
                         if (redirect === 'profile') {
-                            res.redirect('/profile');
+                            res.redirect(`/profile/${message}`);
                         } else if (redirect === 'game') {
-                            res.redirect('/');
+                            res.redirect(`/home/${message}`);
                         };   
                     } else {
                         tasksCompletedArray.forEach(task => {
@@ -259,10 +265,11 @@ module.exports = {
             GameTask.findOne({task: task}, function(err, result) {
                 if(!err) {
                     if(!result){
+                        let message = `Try again. We couldn't find that task in the database.`;
                         if (redirect === 'profile') {
-                            res.redirect('/profile');
+                            res.redirect(`/profile/${message}`);
                         } else if (redirect === 'game') {
-                            res.redirect('/');
+                            res.redirect(`/home/${message}`);
                         };   
                     } else {
                         gradsCompletedArray = result.graduatesCompleted;
@@ -277,10 +284,11 @@ module.exports = {
                                     if(saveErr) {
                                         return saveErr;
                                     } else {
+                                        let message = `The date completed has successfully been updated!`;
                                         if (redirect === 'profile') {
-                                            res.redirect('/profile');
+                                            res.redirect(`/profile/${message}`);
                                         } else if (redirect === 'game') {
-                                            res.redirect('/');
+                                            res.redirect(`/home/${message}`);
                                         };   
                                     };
                                 });  
@@ -305,10 +313,11 @@ module.exports = {
             Graduate.findById(req.user._id, function(err, result) {
                 if(!err) {
                     if(!result) {
+                        let message = `There was an error in deleting the task. Try again please.`;
                         if (redirect === 'profile') {
-                            res.redirect('/profile');
+                            res.redirect(`/profile/${message}`);
                         } else if (redirect === 'game') {
-                            res.redirect('/');
+                            res.redirect(`/home/${message}`);
                         }; 
                     } else {
                         tasksCompletedArray.forEach(task => {
@@ -347,10 +356,11 @@ module.exports = {
             GameTask.findOne({task: task}, function(err, result) {
                 if(!err) {
                     if(!result) {
+                        let message = `Try again. There was some difficulty in deleting that task.`
                         if (redirect === 'profile') {
-                            res.redirect('/profile');
+                            res.redirect(`/profile/${message}`);
                         } else if (redirect === 'game') {
-                            res.redirect('/');
+                            res.redirect(`/home/${message}`);
                         };
                     } else {
                         gradsCompletedArray = result.graduatesCompleted;
@@ -363,10 +373,11 @@ module.exports = {
                                     if(saveErr) {
                                         return saveErr;
                                     } else {
+                                        let message = `The task has been deleted!`;
                                         if (redirect === 'profile') {
-                                            res.redirect('/profile');
+                                            res.redirect(`/profile/${message}`);
                                         } else if (redirect === 'game') {
-                                            res.redirect('/');
+                                            res.redirect(`/home/${message}`);
                                         };   
                                     }
                                 })

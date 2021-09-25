@@ -1,18 +1,20 @@
+    <!-- message variable needs to be created to pass into the /home/:message route -->
+    <% let message = 'none' %>
     <nav>
-        <a href="/">
+        <a href="/home/<%= message %>">
             <img class="nav-logo" src="/images/CodeSquad-The-Game-Logo-Red-Black.png" alt="logo: staggered opening and closing tag to the left with CodeSquad The Game text to the right">
         </a>
         <!-- navbar full list for bigger screens -->
         <div class="container-nav-list">
             <ul class="navbar">
-                <li><a href="/">ADD POINTS</a></li>
+                <li><a href="/home/<%= message %>">ADD POINTS</a></li>
                 <li><a href="/about">ABOUT</a></li>
                 <% if(user === undefined) { %>
                     <li><a href="/profile/login">LOGIN</a></li>                 
                 <% } else { %>
                     <li><a href="/resources">RESOURCES</a></li>
                     <li><a href="/scoreboard">SCOREBOARD</a></li>
-                    <li><a href="/profile">PROFILE</a></li>
+                    <li><a href="/profile/<%= message %>">PROFILE</a></li>
                     <li><a href="/profile/logout">LOGOUT</a></li> 
                 <% } %> 
             </ul>
@@ -22,14 +24,14 @@
             <ul>
                 <li class="nav-menu-icon"><a href="javascript:void(0);"><i class="fas fa-bars"></i></a></li>
                 <div class="navbar-dropdown-list" id="nav-dropdown">
-                    <li><a href="/">ADD POINTS</a></li>
+                    <li><a href="/home/<%= message %>">ADD POINTS</a></li>
                     <li><a href="/about">ABOUT</a></li>
                     <% if(user === undefined) { %>
                         <li><a href="/profile/login">LOGIN</a></li>                 
                     <% } else { %>
                         <li><a href="/resources">RESOURCES</a></li>
                         <li><a href="/scoreboard">SCOREBOARD</a></li>
-                        <li><a href="/profile">PROFILE</a></li>
+                        <li><a href="/profile/<%= message %>">PROFILE</a></li>
                         <li><a href="/profile/logout">LOGOUT</a></li> 
                     <% } %> 
                 </div>

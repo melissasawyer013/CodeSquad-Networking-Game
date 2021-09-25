@@ -13,8 +13,11 @@ router.route('/createGraduate')
     .get(adminController.createGraduatePage)
     .post(adminController.createGraduate)
 
-router.route('/graduateEdit/:id')
+router.route('/graduateEdit/:id/:message')
     .get(adminController.editGraduate)
+
+//Not sure if this is split up right or should be combined with route above.
+router.route('/graduateEdit/:id')
     .put(adminController.updateGraduate)
 
 router.route('/checkUpdateTaskDate/:id/:maxRate/:task/:gradId/:redirect')

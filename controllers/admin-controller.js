@@ -73,6 +73,7 @@ module.exports = {
         if(req.isAuthenticated()) {
             if(req.user.adminStatus === 'Admin') {
                 const { id } = req.params;
+                const { message } = req.params;
                 Graduate.findOne({_id: id}, (err, foundGraduate) => {
                     if(err) {
                         return err;
@@ -110,7 +111,7 @@ module.exports = {
                                         }); 
                                     };
                                 });
-                                res.render('pages/admin-graduate-edit', {foundGraduate: foundGraduate, user: req.user, tasksCompletedAllTime: tasksCompletedAllTime, tasksCompletedToday: tasksCompletedToday, tasksCanAddToday: tasksCanAddToday });
+                                res.render('pages/admin-graduate-edit', {foundGraduate: foundGraduate, user: req.user, tasksCompletedAllTime: tasksCompletedAllTime, tasksCompletedToday: tasksCompletedToday, tasksCanAddToday: tasksCanAddToday, message: message });
                             };
                         }) 
                     };
@@ -162,7 +163,8 @@ module.exports = {
                 Graduate.findById(gradId, (error, result) => {
                     if(!error) {
                         if(!result) {
-                            res.redirect(`/admin/graduateEdit/${gradId}`);
+                            let message = `Try again. Something went wrong when trying to locate the graduate in the database.`
+                            res.redirect(`/admin/graduateEdit/${gradId}/${message}`);
                         } else {
                             if (maxRate === 'daily') {
                                 let tasksCompletedArray = result.tasksCompleted;
@@ -170,7 +172,8 @@ module.exports = {
                                     //for each task in tasksCompleted array in database, flag
                                     if (task === tasksCompletedArray[i].task && req.body.dateCompleted === tasksCompletedArray[i].dateCompleted) {
 //Eventually have admin/gradedit accept messages and send a message that they can't change the date completed to that date because the same task has already been completed on that day, and you can only do it once per day.
-                                        res.redirect(`/admin/graduateEdit/${gradId}`);
+                                        let message = `You can't change the date completed to the date you selected because the task has already been completed by the graduate on that date and can only be done once per day.`
+                                        res.redirect(`/admin/graduateEdit/${gradId}/${message}`);
                                         return err;
                                         break;
                                     };
@@ -269,7 +272,8 @@ module.exports = {
                             if(error) {
                                 return error;
                             } else {
-                                res.redirect(`/admin/graduateEdit/${gradId}`);
+                                let message = `The task has successfully been added to the grad's completed tasks. Their point total increased by ${gameTaskPoints}.`;
+                                res.redirect(`/admin/graduateEdit/${gradId}/${message}`);
                             }
                         })
                     }
@@ -294,7 +298,8 @@ module.exports = {
                 Graduate.findById(gradId, function(err, result) {
                     if(!err) {
                         if(!result){
-                            res.redirect(`/admin/graduateEdit/${gradId}`);  
+                            let message = `Please try again. There was an error locating the graduate in the database.`;
+                            res.redirect(`/admin/graduateEdit/${gradId}/${message}`);  
                         } else {
                             let tasksCompletedArray = result.tasksCompleted;
                             tasksCompletedArray.forEach(task => {
@@ -341,7 +346,8 @@ module.exports = {
                 GameTask.findOne({task: task}, function(err, result) {
                     if(!err) {
                         if(!result){
-                            res.redirect(`/admin/graduateEdit/${gradId}`);   
+                            let message = `An error occured. Please try again.`
+                            res.redirect(`/admin/graduateEdit/${gradId}/${message}`);   
                         } else {
                             gradsCompletedArray = result.graduatesCompleted;
                             gradsCompletedArray.forEach(entry => {
@@ -355,7 +361,8 @@ module.exports = {
                                         if(saveErr) {
                                             return saveErr;
                                         } else {
-                                            res.redirect(`/admin/graduateEdit/${gradId}`);   
+                                            let message = `The date completed was successfully updated.`;
+                                            res.redirect(`/admin/graduateEdit/${gradId}/${message}`);   
                                         };
                                     });  
                                 };
@@ -476,7 +483,8 @@ module.exports = {
                 Graduate.findById(gradId, (err, result) => {
                     if(!err) {
                         if(!result) {
-                            res.redirect(`/admin/graduateEdit/${gradId}`);
+                            let message = `Error. Try again.`;
+                            res.redirect(`/admin/graduateEdit/${gradId}/${message}`);
                         } else {
                             let tasksCompletedArray = result.tasksCompleted;
                             tasksCompletedArray.forEach(task => {
@@ -519,7 +527,8 @@ module.exports = {
                 GameTask.findOne({task: task}, function(err, result) {
                     if(!err) {
                         if(!result) {
-                            res.redirect(`/admin/graduateEdit/${gradId}`);
+                            let message = `Error locating game task. Try again.`;
+                            res.redirect(`/admin/graduateEdit/${gradId}/${message}`);
                         } else {
                             gradsCompletedArray = result.graduatesCompleted;
                             gradsCompletedArray.forEach(entry => {
@@ -531,7 +540,8 @@ module.exports = {
                                         if(saveErr) {
                                             return saveErr;
                                         } else {
-                                            res.redirect(`/admin/graduateEdit/${gradId}`);
+                                            let message = `The task was successfully deleted from the grad's completed tasks.`
+                                            res.redirect(`/admin/graduateEdit/${gradId}/${message}`);
                                         }
                                     })
                                 };

@@ -1,12 +1,14 @@
+<!-- message variable needs to be created to pass into the /home/:message route -->
+<% let message = 'none' %>
     <footer>
         <div class="container-footer-content">
-            <a href="/"><img src="/images/CodeSquad-The-Game-Logo-Red-Black.png" alt="logo: staggered opening and closing tag to the left with CodeSquad The Game text to the right" class="logo-footer"></a>
+            <a href="/home/<%= message %>"><img src="/images/CodeSquad-The-Game-Logo-Red-Black.png" alt="logo: staggered opening and closing tag to the left with CodeSquad The Game text to the right" class="logo-footer"></a>
         </div>
         <div class="container-footer-links">
             <% if(user === undefined) { %>
                 <div class="footer-links-column">
                     <ul>
-                        <li><a href="/">ADD POINTS</a></li>
+                        <li><a href="/home/<%= message %>">ADD POINTS</a></li>
                         <li><a href="/about">ABOUT</a></li>
                         <li><a href="/profile/login">LOGIN</a></li> 
                     </ul>
@@ -15,14 +17,14 @@
             <% } else { %>
                 <div class="footer-links-column">
                     <ul>
-                        <li><a href="/">ADD POINTS</a></li>
+                        <li><a href="/home/<%= message %>">ADD POINTS</a></li>
                         <li><a href="/about">ABOUT</a></li>
                         <li><a href="/resources">RESOURCES</a></li>
                     </ul>
                 </div>
                 <div class="footer-links-column">
                     <ul>
-                        <li><a href="/profile">PROFILE</a></li>
+                        <li><a href="/profile/<%= message %>">PROFILE</a></li>
                         <li><a href="/scoreboard">SCOREBOARD</a></li>
                         <li><a href="/profile/logout">LOGOUT</a></li>
                     </ul>

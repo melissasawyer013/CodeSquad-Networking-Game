@@ -3,7 +3,7 @@ const router = express.Router();
 const profileController = require('../controllers/profile-controller');
 
 // route for /profile
-router.route('/')
+router.route('/:message')
     .get(profileController.profile);
 
 router.route('/login')

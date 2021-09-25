@@ -9,7 +9,11 @@
             You must <a href="/profile/login" class="container-content-link">login</a> to earn points. See the <a href="/about" class="container-content-link">About</a> page to learn more.
         </p> 
     <% } else { %>
-        <p>Welcome <%= user.name %>! Check off the tasks you've completed below in order to score points.</p>
+        <% if( message === `none`) { %>
+            <p>Welcome <%= user.name %>! Check off the tasks you've completed below in order to score points.</p>
+        <% } else { %>
+            <p class="text-bold"><%= message %></p>
+        <% } %> 
         <h2 class="text-center">YOUR TOTAL POINTS: <%= user.totalPoints %> </h2>
         <div class="container-game-heading red-accents">
             <h2>Start with the BASICS.</h2>

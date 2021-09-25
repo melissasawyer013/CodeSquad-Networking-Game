@@ -3,6 +3,9 @@
 
 <div class="container-content">
     <h1>Edit <%= foundGraduate.name %>'s Information </h1>
+    <% if( message != `none`) { %>
+        <p class="text-bold"><%= message %></p>
+    <% } %>
     <div class="container-buttons-row">
         <a href="/admin" class="link-button">Back to Admin Dashboard</a>
         <a href="/admin/graduatesList" class="link-button">See Graduates List</a>
