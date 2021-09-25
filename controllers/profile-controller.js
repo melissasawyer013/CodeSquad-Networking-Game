@@ -63,9 +63,10 @@ module.exports = {
             req.logout();
             authenticationInfo.githubProfileToMatch = undefined;
             authenticationInfo.githubUrlToMatch = undefined;
-            res.redirect(`/home/${message}`);    
+            res.redirect(`/`);
+            // res.redirect(`/home/${message}`);    
         } else {
-            res.redirect(`/home/${message}`)
+            res.redirect(`/`)
         } 
     },
 
