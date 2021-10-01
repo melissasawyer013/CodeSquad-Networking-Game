@@ -146,6 +146,7 @@ module.exports = {
     updateProfile: (req, res) => {
         if(req.isAuthenticated()) {
             const { id } = req.params;
+            let message = `Your profile information has been successfully updated.`;
             Graduate.findByIdAndUpdate(id, {$set: {
                 name: req.body.name,
                 email: req.body.email,
@@ -154,7 +155,7 @@ module.exports = {
                 if(err) {
                     return err;
                 } else {
-                    res.redirect(`/profile`);
+                    res.redirect(`/profile/page/${message}`);
                 };
             })
         } else {
