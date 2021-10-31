@@ -6,6 +6,9 @@ const scoreboardController = require('../controllers/scoreboard-controller');
 router.route('/')
     .get(scoreboardController.scoreboard);
 
+router.route('/search')
+    .post(scoreboardController.lookup)
+
 // router.route('/scoreboardMonth/:sortedGradsAllTime')
 //     .get(scoreboardController.scoreboardMonth);
 

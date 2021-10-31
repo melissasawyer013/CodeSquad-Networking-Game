@@ -3,7 +3,7 @@
 
 <div class="container-content">
     <h1>Scoreboards</h1>
-    <h2 class="heading">Monthly Points Scoreboard</h2>
+    <h2 class="heading">This Month's Scoreboard</h2>
     <% let place; %> 
     <% for (let i = 0; i < 3; i++) { %>
         <% if(i===0) { %>
@@ -31,6 +31,59 @@
         <% }; %> 
         <%- include ('../partials/scoreboard-row', {grad: sortedGradsAllTime[i], place: place, board: 'all-time'}) %> 
     <% } %> 
+    
+    <% if(user.adminStatus === 'Admin') { %>
+        <h2 class="heading">Search by Month</h2>
+        <div class="container-form">
+            <form action="/scoreboard/search" method="POST">
+                <div class="container-form-row">
+                    <div class="container-form-label">
+                        <label for="scoreboardSearchMonth" class="container-form-label">Month:</label>
+                    </div>
+                    <div class="container-form-input">
+                        <select name="scoreboardSearchMonth" id="scoreboardSearchMonth">
+                            <option value="" disable selected hidden>Month</option>
+                            <option value="01">January</option>
+                            <option value="02">February</option>
+                            <option value="03">March</option>
+                            <option value="04">April</option>
+                            <option value="05">May</option>
+                            <option value="06">June</option>
+                            <option value="07">July</option>
+                            <option value="08">August</option>
+                            <option value="09">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+                    
+                </div>
+                <div class="container-form-row">
+                    <div class="container-form-label">
+                        <label for="scoreboardSearchYear" class="container-form-label">Year:</label>
+                    </div>
+                    <div class="container-form-input">
+                        <select name="scoreboardSearchYear" id="scoreboardSearchYear">
+                            <!-- Uncomment out the placeholder and 2022 when year changes. Add new option each year. -->
+                            <!-- <option value="" disable selected hidden>Year</option> -->
+                            <option value="2021">2021</option>
+                            <!-- <option value="2022">2022</option> -->
+                        </select>
+                    </div>
+                </div>
+                <div class="container-button-submit">
+                    <input type="submit" class="button-submit red-accents" value="Search">
+                </div>
+
+            </form>
+            
+        </div>
+    <% } %> 
+
+    
+    
+
 
 
 </div>

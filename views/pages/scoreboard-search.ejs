@@ -1,0 +1,17 @@
+<%- include('../partials/head') -%>
+<%- include('../partials/navbar') -%>
+
+<div class="container-content">
+    <h1>Scoreboards</h1>
+    <h2 class="heading">Search Results</h2>
+    <% for (let i = 0; i < sortedGradsDate.length; i++) { %>
+        <% place = i + 1; %>
+        <%- include ('../partials/scoreboard-row', {grad: sortedGradsDate[i], place: place, board: 'search'}) %> 
+    <% } %> 
+
+</div>
+
+
+
+
+<%- include('../partials/footer') -%> 
