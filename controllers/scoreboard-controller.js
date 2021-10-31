@@ -42,7 +42,6 @@ module.exports = {
     lookup: (req, res) => {
         if (req.isAuthenticated() && req.user.adminStatus === 'Admin') {
             let monthToFind = req.body.scoreboardSearchMonth;
-            console.log(`monthToFind: ${monthToFind}`);
             let yearToFind = req.body.scoreboardSearchYear;
             Graduate.find({}).sort({ totalPoints:-1 }).exec(function (err, sortedGradsAllTime) {
                 if(err) {
@@ -72,7 +71,9 @@ module.exports = {
                     sortedGradsDate.sort((a, b) => parseFloat(b.monthlyPoints) - parseFloat(a.monthlyPoints));
                     res.render('pages/scoreboard-search', {
                         user: req.user,
-                        sortedGradsAllTime: sortedGradsAllTime, sortedGradsDate: sortedGradsDate
+                        sortedGradsAllTime: sortedGradsAllTime, sortedGradsDate: sortedGradsDate,
+                        month: monthToFind,
+                        year: yearToFind
                     });
                 }
             });

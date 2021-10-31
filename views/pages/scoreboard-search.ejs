@@ -49,10 +49,12 @@
         </form>
         
     </div>
-    <h2 class="heading">Search Results</h2>
+    <h2 class="heading">Search Results: <%= month %> <%= year %></h2>
     <% for (let i = 0; i < sortedGradsDate.length; i++) { %>
         <% place = i + 1; %>
-        <%- include ('../partials/scoreboard-row', {grad: sortedGradsDate[i], place: place, board: 'search'}) %> 
+        <% if(sortedGradsDate[i].monthlyPoints > 0) { %>
+            <%- include ('../partials/scoreboard-row', {grad: sortedGradsDate[i], place: place, board: 'search'}) %> 
+        <% } %> 
     <% } %> 
 
 </div>
