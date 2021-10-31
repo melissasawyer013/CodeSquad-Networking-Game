@@ -11,7 +11,9 @@
                 <span><%= grad.monthlyPoints %> points</span>
             <% } else if (board === 'all-time') { %>
                 <span><%= grad.totalPoints %> points</span>
-            <% } %> 
+            <% } else if (board === 'search') { %> 
+                <span><%= grad.monthlyPoints %> points</span>
+            <% } %>
         </div>
         
         
