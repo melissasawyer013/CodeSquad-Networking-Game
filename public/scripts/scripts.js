@@ -9,3 +9,7 @@ function toggleMenu() {
 
 let hamburgerMenu = document.getElementsByClassName("nav-menu-icon")[0];
 hamburgerMenu.addEventListener("click", toggleMenu);
+
+$(document).ready(() => {
+ 
+});
