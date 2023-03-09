@@ -63,7 +63,8 @@ passport.use(new GitHubStrategy({
     // callbackURL: "http://localhost:5500/profile/auth/github/callback"
     
     //callbackURL for live
-    callbackURL: "https://codesquad-the-game.herokuapp.com/profile/auth/github/callback"
+    // callbackURL: "https://codesquad-the-game.herokuapp.com/profile/auth/github/callback"
+    callbackURL: "https://codesquadthegame.cyclic.app/profile/auth/github/callback"
 },
     function(accessToken, refreshToken, profile, done) {
         //conditional checks if the GitHub URL returned matches what was saved in the githubUrlToMatch variable from the database
