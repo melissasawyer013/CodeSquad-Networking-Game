@@ -72,7 +72,7 @@ passport.use(new GitHubStrategy({
             Graduate.findOne({ githubUrl: profile.profileUrl }, function (err, user) {
                 Graduate.findOneAndUpdate({githubUrl: profile.profileUrl}, {$set: { githubId:profile.id }}, { new: true }, error => {})
                 console.log(user);
-                console.log(req.isAuthenticated());
+                console.log("is the user authenticated");
                 return done(err, user);
             });
         } else {
