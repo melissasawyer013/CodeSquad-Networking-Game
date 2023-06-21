@@ -7,6 +7,7 @@ const authenticationInfo = require('../config/authorization');
 
 module.exports = {
     profile: (req, res) => {
+        console.log(req.isAuthenticated());
         if(req.isAuthenticated()) {
             const { message } = req.params;
             res.render('pages/profile', { user: req.user, message: message, completedTasks: req.user.tasksCompleted });    
