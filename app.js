@@ -16,8 +16,8 @@ app.use(express.json());
 
 app.use(session({
     secret: process.env.SECRET_KEY,
-    resave: false,
-    saveUninitialized: false
+    resave: true,
+    saveUninitialized: true
 }));
 
 app.use(passport.initialize());
