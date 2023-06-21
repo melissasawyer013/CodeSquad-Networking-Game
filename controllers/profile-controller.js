@@ -52,6 +52,7 @@ module.exports = {
             if(req.isAuthenticated()) {
                 let message = `none`;
                 res.redirect(`/home/${message}`);
+                console.log(req.isAuthenticated());
             } else {
                 res.redirect('/profile/logout');
             };
