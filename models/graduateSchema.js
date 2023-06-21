@@ -47,11 +47,13 @@ const graduateSchema = new Schema({
 const Graduate = mongoose.model('Graduate', graduateSchema);
 
 passport.serializeUser(function(user, done) {
+    console.log('user has been serialized');
     done(null, user.id);
   });
   
 passport.deserializeUser(function(id, done) {
     Graduate.findById(id, function(err, user) {
+        console.log('user has been deserialized');
         done(err, user);
     });
 });
