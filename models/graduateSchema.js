@@ -71,6 +71,7 @@ passport.use(new GitHubStrategy({
         if (profile.profileUrl === authenticationInfo.githubUrlToMatch) {
             Graduate.findOne({ githubUrl: profile.profileUrl }, function (err, user) {
                 Graduate.findOneAndUpdate({githubUrl: profile.profileUrl}, {$set: { githubId:profile.id }}, { new: true }, error => {})
+                console.log(user);
                 return done(err, user);
             });
         } else {
