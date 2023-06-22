@@ -51,9 +51,10 @@ module.exports = {
         function(req, res) {
             if(req.isAuthenticated()) {
                 let message = `none`;
-                console.log(req.isAuthenticated());
+                console.log(`githubCallback - passport.authenticate: ${req.isAuthenticated()}`);
                 res.redirect(`/home/${message}`);
             } else {
+                console.log(`not authentic`)
                 res.redirect('/profile/logout');
             };
         }
