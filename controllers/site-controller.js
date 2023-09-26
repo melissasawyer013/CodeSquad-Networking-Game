@@ -63,8 +63,10 @@ module.exports = {
 
     about: (req, res) => {
         if(req.isAuthenticated()) {
+            console.log('about to render about with user');
             res.render('pages/about', {user: req.user})
         } else {
+            console.log('about to render about without user');
             res.render('pages/about', {user: undefined})
         };
     },
